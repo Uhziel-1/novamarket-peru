@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NovaMarket Perú — Cómo Funciona, Fórmulas, APIs y Aporte al Negocio</title>
+  <title>NovaMarket Perú — Minería de Datos bajo Metodología CRISP-DM</title>
   <link rel="stylesheet" href="deck-base.css" />
   <link rel="stylesheet" href="animaciones.css" />
   <link rel="stylesheet" href="demo.css" />
@@ -16,139 +16,383 @@
 
     <!-- ==================== 00 · PORTADA ==================== -->
     <section class="slide slide-title active" data-group="0" data-color="#1e293b" data-kind="title" data-title="Portada" style="--slide-color:#1e293b">
-      <div class="title-pill anim d1">Minería de Datos · Metodología CRISP-DM · Sistema + APIs + Negocio</div>
+      <div class="title-pill anim d1">Minería de Datos · Metodología CRISP-DM · Sistema E-Commerce + APIs</div>
       <h1 class="anim d2">NovaMarket Perú</h1>
       <p class="title-sub anim d3">
-        Tienda online inteligente diseñada para explicar <strong>por qué</strong> se usa Minería de Datos, <strong>cómo se calcula cada recomendación</strong>, cuándo actúa cada API y <strong>cuánto valor aporta al negocio</strong>.
+        Implementación integral de CRISP-DM (Fases 1 a 6) sobre <code>541,909</code> transacciones reales de <em>UCI Online Retail</em> para recomendación de carrito, segmentación RFM, predicción de recompra y despliegue web con APIs en vivo.
       </p>
       <div class="cover-meta anim d4">
         <span><strong>Autor:</strong> Uhziel Elí Condori Rojas</span>
-        <span><strong>Curso:</strong> Minería de Datos — UPeU 2026-2</span>
-        <span><strong>Base Real:</strong> 541,909 transacciones (Online Retail)</span>
+        <span><strong>Universidad:</strong> UPeU — Ciclo 2026-2</span>
+        <span><strong>Flujo:</strong> Negocio → Datos → Preparación → Modelado → Evaluación → Despliegue</span>
       </div>
     </section>
 
-    <!-- ==================== BLOQUE 01 (#2563eb): EL SISTEMA WEB ==================== -->
-    <section class="slide slide-title" data-group="1" data-color="#2563eb" data-kind="title" data-title="01 · El Sistema Web (Cliente vs Gerencia)" style="--slide-color:#2563eb">
-      <div class="title-pill anim d1">Bloque 01</div>
-      <h1 class="anim d2">Vista Cliente vs. Vista Interna</h1>
+    <!-- ==================== BLOQUE 01 (#7c3aed): METODOLOGÍA CRISP-DM (FASES 1–5) ==================== -->
+    <section class="slide slide-title" data-group="1" data-color="#7c3aed" data-kind="title" data-title="01 · CRISP-DM: Fases 1 a 5" style="--slide-color:#7c3aed">
+      <div class="title-pill anim d1">Bloque 01 · Proceso Analítico</div>
+      <h1 class="anim d2">Metodología CRISP-DM (Fases 1–5)</h1>
       <p class="title-sub anim d3">
-        Un comprador normal solo ve una tienda limpia estilo marketplace; la gerencia y el expositor ven por dentro las fórmulas, las proyecciones Pasado → Futuro y las APIs en vivo.
+        Recorrido secuencial desde la definición del problema comercial y auditoría del histórico hasta el modelado, la validación temporal <em>out-of-time</em> y la explicabilidad con SHAP.
       </p>
       <span class="section-num-bg">01</span>
     </section>
 
-    <!-- 1.1 SEPARACIÓN DE VISTAS -->
-    <section class="slide" data-group="1" data-color="#2563eb" data-kind="content" data-title="1.1 Arquitectura: Afuera vs Adentro" style="--slide-color:#2563eb">
+    <!-- FASE 1: COMPRENSIÓN DEL NEGOCIO -->
+    <section class="slide" data-group="1" data-color="#7c3aed" data-kind="content" data-title="Fase 1 · Comprensión del Negocio" style="--slide-color:#7c3aed">
       <header class="slide-header anim d1">
-        <div class="kicker-sec">01 · El Sistema Web (NovaMarket Perú)</div>
-        <h2>1.1 Separación Clara: Afuera (Cliente) vs. Adentro (Empresa)</h2>
-        <p class="header-summary">Resuelve el problema de mostrar métricas internas al comprador, sin ocultar el motor cuando se audita.</p>
+        <div class="kicker-sec">01 · CRISP-DM · Fase 1 de 6 (Business Understanding)</div>
+        <h2>Fase 1: Comprensión del Negocio, Alcance y Criterios de Éxito</h2>
+        <p class="header-summary">Definición previa al análisis de datos: objetivos comerciales, supuestos explícitos, restricciones y metas cuantitativas.</p>
       </header>
       <div class="full-body">
         <div class="card-grid-3 anim d2">
           <div class="card accent-left">
-            <h3>1. Tienda Pública (Cliente)</h3>
+            <h3>1. Objetivos y Meta Comercial</h3>
             <ul class="bullet-list">
-              <li>Catálogo limpio en 4 columnas con precios en <strong>Soles (PEN)</strong> y carrito lateral.</li>
-              <li><strong>Buscador realista:</strong> espera <em>Enter</em>, entiende español (<code>taza → cup</code>) y corrige tipeo (<code>tecup → teacup</code>).</li>
-              <li>Al entrar al detalle de un producto, muestra <strong>4 complementos debajo</strong>; si no hay regla fuerte, promociona la misma categoría para nunca mostrar vacío.</li>
+              <li><strong>Venta cruzada:</strong> evitar boletas de un solo producto sugiriendo complementos en detalle y carrito (meta operativa: impulsar adopción <code>≥ 15 %</code>).</li>
+              <li><strong>Retención preventiva:</strong> detectar clientes con baja probabilidad de retorno para focalizar cupones sin erosionar margen en compradores frecuentes.</li>
             </ul>
           </div>
           <div class="card accent-left">
-            <h3>2. Botón "Modo Auditoría IA"</h3>
+            <h3>2. Situación, Supuestos y Riesgos</h3>
             <ul class="bullet-list">
-              <li>Interruptor opcional en la cabecera (<code>OFF</code> por defecto para el cliente).</li>
-              <li>Al activarlo en la exposición, revela en el detalle del producto: cuántas boletas lo respaldan, su <strong>Confianza %</strong>, <strong>Lift</strong> y cuánto <strong>+S/</strong> suma al ticket.</li>
-              <li>También permite simular perfiles de comprador detrás de escena.</li>
+              <li><strong>Base histórica real:</strong> <em>UCI Online Retail</em> (dic 2010 – dic 2011; precios base sin costos unitarios/márgenes por SKU).</li>
+              <li><strong>Riesgos iniciales:</strong> registros sin <code>CustomerID</code>, devoluciones y fuerte estacionalidad Q4.</li>
+              <li><strong>Alcance APIs:</strong> FX (<code>USD→PEN</code>) y feriados PE operan en producción (Fase 6), no como features históricas.</li>
             </ul>
           </div>
           <div class="card accent-left">
-            <h3>3. Panel Interno (Gerencia)</h3>
+            <h3>3. Objetivos de Minería y Éxito</h3>
             <ul class="bullet-list">
-              <li><strong>Pasado → Presente → Futuro:</strong> curva real mensual + proyección a 3 meses con simulador de ROI.</li>
-              <li><strong>Control de catálogo:</strong> inventario de los <code>150</code> SKUs por categoría y estrategia por segmento RFM.</li>
-              <li><strong>Cero adivinanzas:</strong> bitácora viva de APIs y glosario para practicantes nuevos.</li>
+              <li><strong>Motor 1 (Asociación):</strong> pares <code>1 → 1</code> con <code>Confianza ≥ 15 %</code> y <code>Lift ≥ 1.5×</code>.</li>
+              <li><strong>Motor 2A (Clustering):</strong> segmentación RFM accionable con <code>K-Means</code>.</li>
+              <li><strong>Motor 2B (Supervisado):</strong> clasificación binaria <em>out-of-time</em> de recompra futura (criterio objetivo: <code>ROC-AUC ≥ 0.78</code>).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="result-pill anim d3">
+          <strong>Plan iterativo del proyecto:</strong> F1 Negocio → F2 Auditoría/EDA → F3 Preparación causal → F4 Modelado (No supervisado + 3 clasificadores) → F5 Evaluación vs. meta + SHAP → F6 Despliegue en FastAPI y monitoreo.
+        </div>
+      </div>
+    </section>
+
+    <!-- FASE 2A: COMPRENSIÓN DE LOS DATOS (DICCIONARIO Y RECONCILIACIÓN) -->
+    <section class="slide" data-group="1" data-color="#7c3aed" data-kind="content" data-title="Fase 2A · Diccionario y Calidad de Datos" style="--slide-color:#7c3aed">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">01 · CRISP-DM · Fase 2 de 6 (Data Understanding)</div>
+        <h2>Fase 2A: Diccionario de Variables y Reconciliación de Calidad</h2>
+        <p class="header-summary">541,909 filas crudas (8 columnas) de dic 2010 a dic 2011 · 4,338 clientes y 3,665 SKUs antes de ingeniería.</p>
+      </header>
+      <div class="split-balanced anim d2">
+        <div class="single-chart-wrap">
+          <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 1: Auditoría inicial de calidad sobre 541,909 registros crudos en eda.py.">
+            <img src="assets/01_eda_calidad_datos.png" alt="Auditoría de calidad de datos" />
+          </div>
+          <p class="chart-caption"><strong>Fig. 1:</strong> Descarte de anomalías antes de modelar (criterios traslapados).</p>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div class="card accent-left">
+            <h3>Esquema Original (8 Variables)</h3>
+            <p style="font-size:calc(0.9rem * var(--scale-body))"><code>InvoiceNo</code> (boleta/<code>C</code>), <code>StockCode</code> (SKU), <code>Description</code>, <code>Quantity</code>, <code>InvoiceDate</code>, <code>UnitPrice</code>, <code>CustomerID</code>, <code>Country</code>.</p>
+          </div>
+          <div class="card accent-left">
+            <h3>Reconciliación Exacta de Limpieza</h3>
+            <ul class="bullet-list">
+              <li><strong>Crudo:</strong> <code>541,909</code> registros (<code>135,080</code> sin cliente, <code>11,805</code> qty/precio ≤ 0, <code>9,288</code> cancelaciones <code>C</code>; reducción neta traslapada: <code>144,025</code>).</li>
+              <li><strong>Limpio EDA (<code>eda.py</code>):</strong> <strong>397,884</strong> filas válidas (<code>$8,911,407.90</code> en <code>18,532</code> boletas).</li>
+              <li><strong>Limpio Modelado (<code>train.py</code>):</strong> <strong>396,337</strong> filas tras retirar <code>1,547</code> códigos administrativos (<code>POST</code>, <code>DOT</code>, <code>M</code>).</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 1.2 CUÁNDO SE LLAMA CADA API Y PARA QUÉ SIRVE -->
-    <section class="slide" data-group="1" data-color="#2563eb" data-kind="content" data-title="1.2 Cuándo se Llama Cada API y Qué Aporta" style="--slide-color:#2563eb">
+    <!-- FASE 2B: EDA JUSTIFICATIVO (FIG 2 Y FIG 3) -->
+    <section class="slide" data-group="1" data-color="#7c3aed" data-kind="content" data-title="Fase 2B · Hallazgos EDA y Justificación" style="--slide-color:#7c3aed">
       <header class="slide-header anim d1">
-        <div class="kicker-sec">01 · El Sistema Web (NovaMarket Perú)</div>
-        <h2>1.2 Mapa de APIs: Cuándo Actúan y Qué Beneficio Dan</h2>
-        <p class="header-summary">Cada llamada externa o interna cumple una función comercial concreta (no decorativa).</p>
+        <div class="kicker-sec">01 · CRISP-DM · Fase 2 de 6 (Exploración EDA)</div>
+        <h2>Fase 2B: Hallazgos Exploratorios que Guían el Modelado</h2>
+        <p class="header-summary">Patrones observados en 396,337 filas limpias y 18,402 boletas comerciales válidas.</p>
       </header>
       <div class="full-body">
-        <div class="card anim d2">
-          <table class="clean-table">
-            <thead>
-              <tr>
-                <th>API / Endpoint</th>
-                <th>Cuándo se dispara</th>
-                <th>Qué hace internamente</th>
-                <th>Para qué sirve al negocio</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>open.er-api.com</code> (Ext.)</td>
-                <td>Al abrir la web y al emitir boleta</td>
-                <td>Obtiene tasa real USD → PEN (ej. <code>3.481</code>)</td>
-                <td>Evita cobrar con dólar desactualizado y protege el margen en productos importados.</td>
-              </tr>
-              <tr>
-                <td><code>date.nager.at</code> (Ext.)</td>
-                <td>Al cargar contexto gerencial</td>
-                <td>Lee feriados de Perú (<code>2026-12-08</code>)</td>
-                <td>Permite preparar promociones y stock antes de fechas festivas de alta demanda.</td>
-              </tr>
-              <tr>
-                <td><code>GET /api/products</code></td>
-                <td>Al pulsar <em>Enter</em> en buscador</td>
-                <td>Sinónimos ES→EN + <code>difflib</code> + popularidad</td>
-                <td>No pierde ventas por errores de escritura y prioriza artículos que más rotan.</td>
-              </tr>
-              <tr>
-                <td><code>POST /api/recommend</code></td>
-                <td>Al abrir un producto o el carrito</td>
-                <td>Reglas <code>Lift × Conf</code> + respaldo categoría</td>
-                <td>Eleva el monto por compra mostrando complementos reales en lugar de dejar espacios vacíos.</td>
-              </tr>
-              <tr>
-                <td><code>POST /predict</code></td>
-                <td>En Predictor Interno o Auditoría</td>
-                <td>Corre <code>K-Means</code> + <code>RandomForest</code></td>
-                <td>Identifica quién está por abandonar (<code>En Riesgo</code>) para enviarle cupón antes de perderlo.</td>
-              </tr>
-              <tr>
-                <td><code>POST /api/checkout</code></td>
-                <td>Al finalizar compra en el carrito</td>
-                <td>Guarda boleta en SQLite + bandera IA</td>
-                <td>Audita cuántas boletas reales aceptaron sugerencias del modelo.</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="dual-charts anim d2">
+          <div class="chart-card">
+            <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 2: Serie mensual de ingresos y boletas (pico en Nov 2011: $1,161,817 en 2,657 boletas).">
+              <img src="assets/02_eda_ventas_mensuales.png" alt="Evolución mensual de ventas" style="max-height:245px" />
+            </div>
+            <p class="chart-caption"><strong>Fig. 2:</strong> Fuerte estacionalidad Q4 (Nov <code>$1.16M</code>) → exige split temporal, nunca aleatorio.</p>
+          </div>
+          <div class="chart-card">
+            <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 3: Top 12 productos más frecuentes en boletas históricas.">
+              <img src="assets/03_eda_top_productos.png" alt="Top productos frecuentes" style="max-height:245px" />
+            </div>
+            <p class="chart-caption"><strong>Fig. 3:</strong> Alta rotación concentrada en SKUs clave → base de los 150 ítems del catálogo.</p>
+          </div>
+        </div>
+        <div class="card-grid-3 anim d3">
+          <div class="card accent-left">
+            <h3>Canastas Multi-Ítem (92.9 %)</h3>
+            <p>De <code>18,402</code> boletas limpias, <strong>92.9 %</strong> contienen ≥ 2 SKUs distintos (mediana <code>15</code>, media <code>21.0</code>) → viabiliza Reglas de Asociación.</p>
+          </div>
+          <div class="card accent-left">
+            <h3>Concentración en UK (89.3 %)</h3>
+            <p>El <strong>89.3 %</strong> de las transacciones proviene de Reino Unido vs. <code>10.7 %</code> internacional → fundamenta la variable <code>is_uk</code>.</p>
+          </div>
+          <div class="card accent-left">
+            <h3>Sesgo en Gasto y Volumen</h3>
+            <p>Distribuciones fuertemente asimétricas a la derecha → justifica transformar con <code>log1p</code> previo a <code>StandardScaler</code>.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 1.3 DEMO VERIFICADA + PROYECCIÓN ECONÓMICA -->
-    <section class="slide" data-group="1" data-color="#2563eb" data-kind="content" data-title="1.3 Ejemplo Verificado: POST /predict y ROI" style="--slide-color:#2563eb">
+    <!-- FASE 3: PREPARACIÓN DE LOS DATOS -->
+    <section class="slide" data-group="1" data-color="#7c3aed" data-kind="content" data-title="Fase 3 · Preparación e Ingeniería Causal" style="--slide-color:#7c3aed">
       <header class="slide-header anim d1">
-        <div class="kicker-sec">01 · El Sistema Web (NovaMarket Perú)</div>
-        <h2>1.3 Así Decide el Modelo en Tiempo Real (<code>POST /predict</code>)</h2>
-        <p class="header-summary">Compara un cliente VIP frente a uno en riesgo para decidir si dar cupón o venta cruzada.</p>
+        <div class="kicker-sec">01 · CRISP-DM · Fase 3 de 6 (Data Preparation)</div>
+        <h2>Fase 3: Ingeniería de Características, Transformaciones y Split</h2>
+        <p class="header-summary">Construcción de datos sin fuga temporal (validación out-of-time) con linaje SHA-256 en DATA_VERSION.md.</p>
+      </header>
+      <div class="full-body">
+        <div class="card-grid-3 anim d2">
+          <div class="card accent-left">
+            <h3>1. Corte Temporal Causal (<code>2011-09-09</code>)</h3>
+            <ul class="bullet-list">
+              <li><strong>Ventana histórica (<code>&lt; corte</code>):</strong> <code>3,360</code> clientes evaluados exclusivamente con compras pasadas.</li>
+              <li><strong>Ventana futura (<code>≥ corte</code>, 91 días):</strong> target binario <code>will_repurchase</code> hasta <code>2011-12-09</code> (tasa positiva: <strong>57.11 %</strong>).</li>
+            </ul>
+          </div>
+          <div class="card accent-left">
+            <h3>2. Las 10 Variables RFM + Catálogo</h3>
+            <ul class="bullet-list">
+              <li><code>recency_days</code>, <code>frequency</code>, <code>monetary</code>, <code>avg_basket_value</code>, <code>total_items</code>, <code>unique_products</code>, <code>tenure_days</code>, <code>purchase_velocity</code>, <code>cancellation_count</code> y <code>is_uk</code>.</li>
+              <li><strong>Canastas:</strong> matriz binaria boleta × SKU sobre los <code>150</code> productos principales.</li>
+            </ul>
+          </div>
+          <div class="card accent-left">
+            <h3>3. Preprocesamiento y Partición</h3>
+            <ul class="bullet-list">
+              <li><strong>Clustering:</strong> <code>log1p</code> + <code>StandardScaler</code> sobre RFM.</li>
+              <li><strong>Supervisado:</strong> <code>ColumnTransformer</code> (mediana + <code>OneHotEncoder</code>; escalado en LR).</li>
+              <li><strong>Holdout estratificado 75 / 25:</strong> <code>2,520</code> train y <strong>840</strong> test intactos.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="result-pill anim d3">
+          <strong>Gobierno de datos:</strong> Ningún escalador ni variable <code>X</code> utiliza transacciones posteriores al <code>2011-09-09</code>. Los artefactos <code>v1.0.0-raw</code>, <code>v2.0.0-clean</code> y <code>v2.0.0-rfm</code> conservan hash SHA-256 verificable.
+        </div>
+      </div>
+    </section>
+
+    <!-- FASE 4A: MODELADO NO SUPERVISADO -->
+    <section class="slide" data-group="1" data-color="#7c3aed" data-kind="content" data-title="Fase 4A · Modelado No Supervisado" style="--slide-color:#7c3aed">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">01 · CRISP-DM · Fase 4 de 6 (Modeling · No Supervisado)</div>
+        <h2>Fase 4A: Reglas de Co-ocurrencia (1 → 1) y Clustering K-Means</h2>
+        <p class="header-summary">Descubrimiento de patrones de compra en canastas y segmentación de cartera previa al modelado predictivo.</p>
+      </header>
+      <div class="split-balanced anim d2">
+        <div class="single-chart-wrap">
+          <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 4: Top reglas de asociación ordenadas por Lift (juego Regency alcanza 18.85×).">
+            <img src="assets/04_reglas_asociacion_lift.png" alt="Reglas de asociación Lift y Confianza" />
+          </div>
+          <p class="chart-caption"><strong>Fig. 4:</strong> Co-ocurrencia matricial sobre <code>15,744</code> boletas con top 150 SKUs.</p>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div class="card accent-left">
+            <h3>Motor 1 · Co-ocurrencia <code>1 → 1</code> (1,560 Reglas)</h3>
+            <p>En lugar de Apriori genérico multi-ítem, se calculó soporte, confianza y lift exactos por pares con filtros <code>cnt_a ≥ 25</code>, <code>cnt_ab ≥ 20</code>, <code>Conf ≥ 15 %</code>, <code>Lift ≥ 1.5×</code> (top 5 por SKU). Ej.: <code>22698 → 22697</code> (<code>460</code> co-compras, <strong>82.73 % Conf</strong>, <strong>18.85× Lift</strong>).</p>
+          </div>
+          <div class="card accent-left">
+            <h3>Motor 2A · <code>K-Means (k=4)</code> (Silhouette = 0.3733)</h3>
+            <p style="font-size:calc(0.86rem * var(--scale-meta)); margin-bottom:6px">Justificación <code>k=4</code>: máximo local accionable ≥ 3 (<code>k=3: 0.3595</code>, <strong>k=4: 0.3733</strong>, <code>k=5: 0.3231</code>, <code>k=6: 0.3291</code>) sobre <code>3,360</code> clientes:</p>
+            <table class="clean-table">
+              <thead><tr><th>Segmento</th><th>Clientes</th><th>Gasto Prom.</th><th>Recompra Real</th></tr></thead>
+              <tbody>
+                <tr><td>VIP Campeón</td><td>458</td><td>$6,832.70</td><td><strong>93.7 %</strong></td></tr>
+                <tr><td>En Riesgo</td><td>1,024</td><td>$1,505.89</td><td><strong>67.0 %</strong></td></tr>
+                <tr><td>Cliente Leal</td><td>432</td><td>$608.79</td><td><strong>59.7 %</strong></td></tr>
+                <tr><td>Dormido / Ocasional</td><td>1,446</td><td>$285.33</td><td><strong>37.8 %</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FASE 4B: MODELADO SUPERVISADO -->
+    <section class="slide" data-group="1" data-color="#7c3aed" data-kind="content" data-title="Fase 4B · Modelado Supervisado y Tuning" style="--slide-color:#7c3aed">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">01 · CRISP-DM · Fase 4 de 6 (Modeling · Supervisado)</div>
+        <h2>Fase 4B: Selección de Algoritmos, Validación Cruzada y Tuning</h2>
+        <p class="header-summary">Comparativa controlada de 3 familias de algoritmos mediante StratifiedKFold(5) sobre 2,520 clientes de train.</p>
+      </header>
+      <div class="full-body">
+        <div class="card-grid-3 anim d2">
+          <div class="card accent-left">
+            <h3>1. LogisticRegression (Baseline)</h3>
+            <ul class="bullet-list">
+              <li><strong>Rol:</strong> referencia lineal interpretable sobre features escaladas.</li>
+              <li><strong>Búsqueda:</strong> <code>RandomizedSearchCV</code> (4 iteraciones, métrica <code>roc_auc</code>).</li>
+              <li><strong>Mejor parámetro:</strong> <code>C = 0.1</code> → <strong>CV ROC-AUC = 0.7394</strong>.</li>
+            </ul>
+          </div>
+          <div class="card accent-left">
+            <h3>2. RandomForestClassifier (Ganador CV)</h3>
+            <ul class="bullet-list">
+              <li><strong>Rol:</strong> ensamble bagging robusto a interacciones no lineales y outliers.</li>
+              <li><strong>Búsqueda:</strong> 8 iteraciones en grilla de profundidad y hojas.</li>
+              <li><strong>Óptimo:</strong> <code>n_estimators=120</code>, <code>max_depth=5</code>, <code>min_samples_leaf=5</code> → <strong>CV ROC-AUC = 0.7426</strong>.</li>
+            </ul>
+          </div>
+          <div class="card accent-left">
+            <h3>3. HistGradientBoostingClassifier</h3>
+            <ul class="bullet-list">
+              <li><strong>Rol:</strong> boosting basado en histogramas para capturar fronteras finas.</li>
+              <li><strong>Búsqueda:</strong> 10 iteraciones (learning rate, profundidad, iteraciones).</li>
+              <li><strong>Óptimo:</strong> <code>lr=0.03</code>, <code>max_depth=3</code>, <code>max_iter=200</code>, <code>min_samples_leaf=20</code> → <strong>CV ROC-AUC = 0.7401</strong>.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="result-pill anim d3">
+          <strong>Criterio de selección y refit:</strong> El pipeline selecciona automáticamente al ganador por mayor <code>CV ROC-AUC</code> (<code>RandomForestClassifier</code>) antes de mirar el holdout de <code>840</code> clientes. Tras evaluar en Fase 5, se realiza refit final sobre los <code>3,360</code> clientes para inferencia productiva.
+        </div>
+      </div>
+    </section>
+
+    <!-- FASE 5A: EVALUACIÓN CUANTITATIVA Y COSTO FP/FN -->
+    <section class="slide" data-group="1" data-color="#7c3aed" data-kind="content" data-title="Fase 5A · Evaluación, Matriz FP/FN y Brecha" style="--slide-color:#7c3aed">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">01 · CRISP-DM · Fase 5 de 6 (Evaluation)</div>
+        <h2>Fase 5A: Evaluación en Holdout (840), Costo FP/FN y Cobertura</h2>
+        <p class="header-summary">Contraste honesto frente a la meta de Fase 1 (ROC-AUC ≥ 0.78), lectura de errores y cobertura de reglas.</p>
+      </header>
+      <div class="split-balanced anim d2">
+        <div class="single-chart-wrap">
+          <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 5: Curvas ROC comparativas y Matriz de Confusión (TN=251, FP=109, FN=139, TP=341 sobre 840 test).">
+            <img src="assets/05_roc_y_confusion.png" alt="ROC y Matriz de Confusión" />
+          </div>
+          <p class="chart-caption"><strong>Fig. 5:</strong> Holdout 25 % (umbral <code>0.50</code>) · Cobertura de reglas: <strong>149/150 SKUs (99.3 %)</strong> con asociación directa.</p>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div class="card">
+            <table class="clean-table">
+              <thead><tr><th>Modelo</th><th>CV AUC</th><th>Hold. AUC</th><th>PR-AUC</th><th>F1</th><th>Acc.</th></tr></thead>
+              <tbody>
+                <tr><td>LogisticRegression</td><td>0.7394</td><td>0.7651</td><td>0.8241</td><td>0.7358</td><td>0.7060</td></tr>
+                <tr class="row-winner"><td>RandomForest (Ganador CV)</td><td><strong>0.7426</strong></td><td>0.7647</td><td>0.8295</td><td>0.7333</td><td>0.7048</td></tr>
+                <tr><td>HistGradientBoosting</td><td>0.7401</td><td><strong>0.7714</strong></td><td><strong>0.8337</strong></td><td>0.7304</td><td>0.7012</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card accent-left" style="padding:12px 16px;">
+            <h3>Costo Comercial de la Matriz (<code>840</code> Test)</h3>
+            <p><code>TN=251</code>, <code>TP=341</code>. <strong>109 Falsos Positivos</strong> (predice retorno, no reciben cupón y se fugan) vs. <strong>139 Falsos Negativos</strong> (reciben incentivo innecesario). Por ello en producción se usan 3 bandas (<code>&lt; 0.45</code> riesgo, <code>0.45–0.70</code> seguimiento, <code>≥ 0.70</code> fidelidad).</p>
+          </div>
+          <div class="audit-note">
+            <strong>Auditoría vs. Meta 0.78:</strong> No se alcanzó <code>0.78</code> sin fuga (<code>0.7647</code> RF / <code>0.7714</code> HGB) debido al ruido inherente al comportamiento humano con 9 meses de historia; se aprueba por su sólido <strong>PR-AUC (0.8295)</strong> y queda como brecha para iteración 2.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FASE 5B: EXPLICABILIDAD SHAP -->
+    <section class="slide" data-group="1" data-color="#7c3aed" data-kind="content" data-title="Fase 5B · Explicabilidad SHAP (10 Drivers)" style="--slide-color:#7c3aed">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">01 · CRISP-DM · Fase 5 de 6 (Validación XAI del Modelo)</div>
+        <h2>Fase 5B: Explicabilidad Global con SHAP (TreeExplainer)</h2>
+        <p class="header-summary">Verificación de coherencia de negocio y sentido direccional de los predictores antes de aprobar el despliegue.</p>
+      </header>
+      <div class="split-balanced anim d2">
+        <div class="single-chart-wrap">
+          <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 6: SHAP Summary Beeswarm de las 10 features sobre los 840 clientes del holdout.">
+            <img src="assets/06_shap_clientes.png" alt="SHAP Summary Plot" />
+          </div>
+          <p class="chart-caption"><strong>Fig. 6:</strong> Mayor <code>recency_days</code> (rojo) empuja a no recomprar; mayor antigüedad/gasto/frecuencia impulsa retorno.</p>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div class="card">
+            <h3>Top 8 Importancias <code>|SHAP|</code> Medio</h3>
+            <div class="bar-chart" style="margin-top:8px; gap:7px;">
+              <div class="bar-row"><span class="bar-lbl">tenure_days</span><div class="bar-track"><div class="bar-fill" style="--w:100%"></div></div><span class="bar-num">0.0609</span></div>
+              <div class="bar-row"><span class="bar-lbl">monetary</span><div class="bar-track"><div class="bar-fill" style="--w:77%"></div></div><span class="bar-num">0.0468</span></div>
+              <div class="bar-row"><span class="bar-lbl">recency_days</span><div class="bar-track"><div class="bar-fill" style="--w:59%"></div></div><span class="bar-num">0.0360</span></div>
+              <div class="bar-row"><span class="bar-lbl">frequency</span><div class="bar-track"><div class="bar-fill" style="--w:54%"></div></div><span class="bar-num">0.0329</span></div>
+              <div class="bar-row"><span class="bar-lbl">total_items</span><div class="bar-track"><div class="bar-fill" style="--w:41%"></div></div><span class="bar-num">0.0250</span></div>
+              <div class="bar-row"><span class="bar-lbl">unique_products</span><div class="bar-track"><div class="bar-fill" style="--w:39%"></div></div><span class="bar-num">0.0236</span></div>
+              <div class="bar-row"><span class="bar-lbl">avg_basket_value</span><div class="bar-track"><div class="bar-fill" style="--w:22%"></div></div><span class="bar-num">0.0133</span></div>
+              <div class="bar-row"><span class="bar-lbl">purchase_velocity</span><div class="bar-track"><div class="bar-fill" style="--w:18%"></div></div><span class="bar-num">0.0109</span></div>
+            </div>
+          </div>
+          <div class="result-pill">
+            <strong>Lectura crítica:</strong> <code>cancellation_count</code> alto correlaciona con compradores de gran volumen. En la API productiva, <code>factores_clave</code> usa reglas de negocio rápidas por latencia mientras SHAP audita el modelo globalmente.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== BLOQUE 02 (#2563eb): FASE 6 · DESPLIEGUE Y SISTEMA WEB ==================== -->
+    <section class="slide slide-title" data-group="2" data-color="#2563eb" data-kind="title" data-title="02 · Fase 6: Despliegue y Sistema Web" style="--slide-color:#2563eb">
+      <div class="title-pill anim d1">Bloque 02 · Fase 6 de CRISP-DM (Deployment)</div>
+      <h1 class="anim d2">Despliegue: Sistema Web, APIs y Gobierno</h1>
+      <p class="title-sub anim d3">
+        Puesta en producción de los modelos aprobados dentro de <strong>NovaMarket Perú</strong> (FastAPI + SQLite + APIs externas en vivo), monitoreo operativo, simulador <em>what-if</em> y revisión final.
+      </p>
+      <span class="section-num-bg">02</span>
+    </section>
+
+    <!-- FASE 6A: PLAN DE DESPLIEGUE, ARQUITECTURA E INTEGRACIÓN API -->
+    <section class="slide" data-group="2" data-color="#2563eb" data-kind="content" data-title="Fase 6A · Arquitectura Productiva y APIs" style="--slide-color:#2563eb">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">02 · CRISP-DM · Fase 6 de 6 (Plan de Despliegue)</div>
+        <h2>Fase 6A: Integración en FastAPI, APIs en Vivo y Experiencia Web</h2>
+        <p class="header-summary">Separación de Tienda Pública (con switch opcional de Auditoría IA) y Panel Interno de Gerencia.</p>
+      </header>
+      <div class="full-body">
+        <div class="card-grid-2 anim d2">
+          <div class="card accent-left">
+            <h3>Sistema Web Dual (<code>app/static/</code>)</h3>
+            <ul class="bullet-list">
+              <li><strong>Tienda Pública:</strong> buscador tolerante a tipeo (<code>difflib</code> + sinónimos ES→EN al pulsar <em>Enter</em>), detalle de producto con 4 complementos garantizados y carrito lateral SQLite.</li>
+              <li><strong>Modo Auditoría IA (Switch):</strong> muestra bajo las tarjetas las métricas reales (Confianza, Lift) solo al activarse para inspección técnica.</li>
+              <li><strong>Panel Gerencia:</strong> inventario por categoría, estrategia K-Means, bitácora API y simulador.</li>
+            </ul>
+          </div>
+          <div class="card accent-left">
+            <h3>Capa API en Producción (FastAPI + Externas)</h3>
+            <table class="clean-table" style="margin-top:4px">
+              <thead><tr><th>Servicio</th><th>Disparador</th><th>Función productiva</th></tr></thead>
+              <tbody>
+                <tr><td><code>open.er-api.com</code></td><td>Carga / Checkout</td><td>Tipo de cambio USD→PEN en vivo (ej. <code>3.481</code>)</td></tr>
+                <tr><td><code>date.nager.at</code></td><td>Panel contexto</td><td>Feriados oficiales Perú (<code>2026/PE</code>)</td></tr>
+                <tr><td><code>POST /api/recommend</code></td><td>Detalle / Carrito</td><td>Reglas <code>1→1</code> (99.3 %) + respaldo por categoría</td></tr>
+                <tr><td><code>POST /predict</code></td><td>Evaluador / Auditoría</td><td>Cluster K-Means + prob. RandomForest</td></tr>
+                <tr><td><code>POST /api/checkout</code></td><td>Compra finalizada</td><td>Persiste boleta + bandera <code>used_recommendation</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FASE 6B: DEMO EN VIVO, SIMULADOR WHAT-IF, MONITOREO Y REVISIÓN -->
+    <section class="slide" data-group="2" data-color="#2563eb" data-kind="content" data-title="Fase 6B · Demo /predict, Monitoreo y Revisión" style="--slide-color:#2563eb">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">02 · CRISP-DM · Fase 6 de 6 (Monitoreo y Revisión del Proyecto)</div>
+        <h2>Fase 6B: Demo en Vivo, Monitoreo y Lecciones Aprendidas</h2>
+        <p class="header-summary">Validación interactiva del endpoint productivo, supuestos del simulador ROI y plan de mantenimiento continuo.</p>
       </header>
 
       <div class="split-balanced anim d2">
         <div class="demo-panel">
           <div class="preset-row">
-            <button type="button" class="preset-btn active" data-preset="vip">Perfil VIP Campeón (#14646)</button>
-            <button type="button" class="preset-btn" data-preset="riesgo">Perfil Riesgo de Fuga (#17850)</button>
+            <button type="button" class="preset-btn active" data-preset="vip">VIP Campeón (#14646)</button>
+            <button type="button" class="preset-btn" data-preset="riesgo">Dormido / Riesgo (#17850)</button>
           </div>
           <div class="demo-grid">
             <div class="demo-field"><label>recency_days</label><input id="in_recency_days" type="number" value="12" /></div>
@@ -165,261 +409,35 @@
                 <option value="UK">UK</option>
               </select>
             </div>
-            <div class="demo-field"><label>algoritmo</label><input type="text" value="RandomForest" readonly /></div>
+            <div class="demo-field"><label>modelo</label><input type="text" value="RandomForest" readonly /></div>
           </div>
           <div class="demo-actions">
             <button type="button" id="btnRunDemo" class="btn-demo">Probar en API (38420)</button>
             <span id="demoStatus" class="demo-status">Ejemplo verificado #14646 (POST /predict)</span>
           </div>
-        </div>
-
-        <div class="demo-panel">
-          <div class="prob-hero">
+          <div class="prob-hero" style="margin-top:4px">
             <span id="demoSeg" class="seg-badge">VIP Campeón · Alta Fidelidad</span>
             <span id="demoProb" class="prob-big">95.22 %</span>
           </div>
-          <strong id="demoTitle">Recompra probable en 90 días (predicción = 1 · fuga 4.78 %)</strong>
-          <div class="bar-track" style="height:14px">
-            <div id="demoBar" class="bar-fill" style="--w:95%"></div>
-          </div>
-          <ul id="demoFactors" class="bullet-list">
-            <li>Compra reciente (12 días desde última visita)</li>
-            <li>Alta recurrencia (18 boletas históricas)</li>
-            <li>Alto valor acumulado ($6,450 USD)</li>
-            <li>Relación madura (240 días de antigüedad)</li>
-          </ul>
-          <div id="demoAction" class="result-pill">
-            Ofrecer venta cruzada premium o envío prioritario sin necesidad de descuento agresivo.
-          </div>
+          <strong id="demoTitle" style="font-size:0.9rem">Recompra probable en 91 días (predicción = 1 · fuga 4.78 %)</strong>
+          <div class="bar-track" style="height:10px"><div id="demoBar" class="bar-fill" style="--w:95%"></div></div>
+          <div id="demoAction" class="result-pill" style="padding:10px 12px">Ofrecer venta cruzada premium o envío prioritario sin necesidad de descuento agresivo.</div>
         </div>
-      </div>
-    </section>
 
-    <!-- ==================== BLOQUE 02 (#7c3aed): CÓMO SE CALCULA Y CRISP-DM ==================== -->
-    <section class="slide slide-title" data-group="2" data-color="#7c3aed" data-kind="title" data-title="02 · Cómo se Calcula y CRISP-DM" style="--slide-color:#7c3aed">
-      <div class="title-pill anim d1">Bloque 02</div>
-      <h1 class="anim d2">Cómo se Calcula y Aporte Real</h1>
-      <p class="title-sub anim d3">
-        Explicación directa de las fórmulas detrás de las recomendaciones, la predicción futura sin fuga temporal y las 6 fases CRISP-DM.
-      </p>
-      <span class="section-num-bg">02</span>
-    </section>
-
-    <!-- 2.0 FASE 1: OBJETIVOS DE NEGOCIO Y MINERÍA -->
-    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 1 · Comprensión del Negocio" style="--slide-color:#7c3aed">
-      <header class="slide-header anim d1">
-        <div class="kicker-sec">02 · Metodología CRISP-DM · Fase 1 de 6</div>
-        <h2>Fase 1: Comprensión del Negocio y Criterios de Éxito</h2>
-        <p class="header-summary">Definición formal del problema comercial, traducción a tareas de Minería de Datos y meta medible.</p>
-      </header>
-      <div class="full-body">
-        <div class="card-grid-2 anim d2">
-          <div class="card accent-left">
-            <h3>Objetivo de Negocio y Situación</h3>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div class="card accent-left" style="padding:14px 16px">
+            <h3>Transparencia del Simulador ROI</h3>
+            <p>La proyección en Gerencia es un <strong>simulador <em>what-if</em></strong> sobre el promedio Sep–Nov 2011 (supuestos configurables: <code>+18 %</code> upsell en ticket, <code>-12 %</code> costo de cupón, crecimiento base <code>+1%/+2%</code> vs IA <code>+3%/+6%</code>), no un modelo econométrico de demanda.</p>
+          </div>
+          <div class="card accent-left" style="padding:14px 16px">
+            <h3>Monitoreo, Reentrenamiento y Replicabilidad</h3>
             <ul class="bullet-list">
-              <li><strong>Problema (Antes):</strong> carritos de 1 solo artículo (baja venta cruzada) y fuga silenciosa de <code>1,024</code> clientes <em>En Riesgo</em> (gasto medio <code>$1,506</code>).</li>
-              <li><strong>Situación y recursos:</strong> <code>541,909</code> boletas reales históricas + APIs externas vivas (FX y feriados Perú) + almacenamiento SQLite.</li>
-              <li><strong>Meta comercial:</strong> subir el ticket en caja y focalizar cupones solo donde hay riesgo real.</li>
+              <li><strong>Disparadores de reentrenamiento:</strong> caída en <code>used_recommendation</code> (SQLite), <em>drift</em> en <code>recency</code>/<code>monetary</code> o cambio trimestral de catálogo vía <code>REENTRENAR_MODELO.bat</code>.</li>
+              <li><strong>Control técnico:</strong> <code>requirements.txt</code>, <strong>SHA-256</strong> en <code>DATA_VERSION.md</code>, <code>5/5</code> pruebas <code>pytest</code> y despliegue listo en local (<code>38420</code>) o Render (<code>render.yaml</code>).</li>
             </ul>
-          </div>
-          <div class="card accent-left">
-            <h3>Objetivos de Minería y Criterios de Éxito</h3>
-            <ul class="bullet-list">
-              <li><strong>Motor 1 (No supervisado):</strong> Reglas de asociación con <code>Confianza ≥ 15 %</code> y <code>Lift ≥ 1.5×</code> para sugerir complementos.</li>
-              <li><strong>Motor 2 (Clustering + Supervisado):</strong> <code>K-Means (k=4)</code> + clasificación binaria de recompra a 90 días (meta <code>ROC-AUC ≥ 0.78</code> sin fuga).</li>
-              <li><strong>Aporte cuantificable:</strong> simulador de retorno trimestral en Soles dentro de Gerencia.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2.1 CÓMO SE CALCULAN LAS REGLAS (ARITMÉTICA CLARA) -->
-    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Cómo se Calcula · Reglas de Asociación" style="--slide-color:#7c3aed">
-      <header class="slide-header anim d1">
-        <div class="kicker-sec">02 · Metodología CRISP-DM · Explicación Matemática Simple</div>
-        <h2>¿Cómo se Calcula Qué Producto Recomendar Debajo de Otro?</h2>
-        <p class="header-summary">No es aleatorio: el algoritmo cuenta co-ocurrencias reales dentro de las 18,532 boletas históricas.</p>
-      </header>
-      <div class="full-body">
-        <div class="card-grid-3 anim d2">
-          <div class="card accent-left">
-            <h3>1. Contar Boletas Juntas</h3>
-            <p>Se arma una matriz <code>Boleta × Producto</code> sobre los <code>150</code> SKUs principales.</p>
-            <p style="margin-top:8px"><strong>Ejemplo real:</strong> La <em>Pink Regency Teacup (22698)</em> y la <em>Green Regency Teacup (22697)</em> aparecieron juntas en <strong>460 boletas</strong>.</p>
-          </div>
-          <div class="card accent-left">
-            <h3>2. Calcular Confianza (%)</h3>
-            <p><code>Confianza = Boletas(A y B) / Boletas(A)</code></p>
-            <p style="margin-top:8px">Para ese par da <strong>82.73 %</strong>: significa que de cada 100 clientes que compraron la taza rosa, ~83 también llevaron la verde en la misma boleta.</p>
-          </div>
-          <div class="card accent-left">
-            <h3>3. Medir el Lift y Promocionar</h3>
-            <p><code>Lift = Confianza / Popularidad(B)</code></p>
-            <p style="margin-top:8px">Obtiene <strong>18.85×</strong> (19 veces más fuerte que el azar). Si un SKU tiene &lt; 4 reglas, el backend completa con <strong>misma categoría y más vendidos</strong> para promocionar siempre.</p>
-          </div>
-        </div>
-        <div class="result-pill anim d3">
-          <strong>En la práctica:</strong> El cliente ve sugerencias útiles y coherentes; el auditor/profesor activa <strong>Modo Auditoría IA</strong> y ve exactamente estos números debajo de cada tarjeta.
-        </div>
-      </div>
-    </section>
-
-    <!-- 2.2 FASE 2: AUDITORÍA Y EVOLUCIÓN HISTÓRICA REAL -->
-    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 2 · Auditoría y Ventas Reales (Pasado)" style="--slide-color:#7c3aed">
-      <header class="slide-header anim d1">
-        <div class="kicker-sec">02 · Metodología CRISP-DM · Fase 2 de 6 (EDA)</div>
-        <h2>Fase 2: Limpieza de Datos Reales y Serie Mensual</h2>
-        <p class="header-summary">De 541,909 registros crudos a $8,911,407.90 en ventas reales limpias para construir el pasado histórico.</p>
-      </header>
-      <div class="full-body">
-        <div class="dual-charts anim d2">
-          <div class="chart-card">
-            <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 1: Se retiraron 135,080 filas sin cliente, 11,805 con cantidad/precio ≤ 0 y 9,288 devoluciones ('C').">
-              <img src="assets/01_eda_calidad_datos.png" alt="Auditoría de calidad de datos" />
-            </div>
-            <p class="chart-caption"><strong>Fig. 1:</strong> Por qué se limpia — quitar devoluciones evita recomendar productos devueltos o clientes fantasma.</p>
-          </div>
-          <div class="chart-card">
-            <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 2: Serie mensual real de ingresos: sube en Sep–Nov 2011 hasta $1.16M (base para proyectar futuro).">
-              <img src="assets/02_eda_ventas_mensuales.png" alt="Evolución mensual de ventas" />
-            </div>
-            <p class="chart-caption"><strong>Fig. 2:</strong> Curva real del pasado — pico en noviembre 2011 (<strong>$1,161,817</strong> en <code>2,657</code> boletas).</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2.3 FASE 3: CÓMO SE PREPARA RFM SIN HACER TRAMPA -->
-    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 3 · Corte Temporal RFM Anti-Leakage" style="--slide-color:#7c3aed">
-      <header class="slide-header anim d1">
-        <div class="kicker-sec">02 · Metodología CRISP-DM · Fase 3 de 6</div>
-        <h2>Fase 3: Cómo Se Predice el Futuro Sin Hacer Trampa</h2>
-        <p class="header-summary">Se corta la historia el 2011-09-09: solo el pasado entra como variable X; los 90 días posteriores son la respuesta real.</p>
-      </header>
-      <div class="full-body">
-        <div class="card-grid-3 anim d2">
-          <div class="card accent-left">
-            <h3>Ventana Pasada (<code>&lt; 2011-09-09</code>)</h3>
-            <p>Para cada uno de los <code>3,360</code> clientes se calcula:</p>
-            <ul class="bullet-list" style="margin-top:6px">
-              <li><strong>Recency:</strong> días desde su última compra.</li>
-              <li><strong>Frequency:</strong> boletas acumuladas.</li>
-              <li><strong>Monetary:</strong> gasto total en USD.</li>
-            </ul>
-          </div>
-          <div class="card accent-left">
-            <h3>Ventana Futura (<code>≥ 2011-09-09</code>)</h3>
-            <p>Se observa en la realidad si el cliente volvió o no en el último trimestre.</p>
-            <p style="margin-top:8px">Resultado real: <strong>57.11 % sí recompró</strong>. Así el modelo aprende hábitos pasados para anticipar el futuro.</p>
-          </div>
-          <div class="card accent-left">
-            <h3>Segmentos Reales (<code>K-Means</code>)</h3>
-            <ul class="bullet-list">
-              <li><strong>VIP Campeón (458):</strong> prom. $6,833 · <strong>93.7 %</strong> recompran.</li>
-              <li><strong>En Riesgo (1,024):</strong> prom. $1,506 · <strong>67.0 %</strong> recompran (foco de rescate).</li>
-              <li><strong>Cliente Leal (432)</strong> y <strong>Dormido (1,446)</strong>.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="result-pill anim d3">
-          <strong>También se filtran 150 SKUs clave:</strong> De <code>3,665</code> productos históricos se extrae el catálogo activo de alta rotación (<code>396,337</code> filas limpias con SHA-256 verificado en <code>DATA_VERSION.md</code>).
-        </div>
-      </div>
-    </section>
-
-    <!-- 2.4 FASE 4 Y 5: MODELADO Y EVALUACIÓN HONESTA -->
-    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 4 y 5 · Modelos, ROC y Auditoría" style="--slide-color:#7c3aed">
-      <header class="slide-header anim d1">
-        <div class="kicker-sec">02 · Metodología CRISP-DM · Fases 4 y 5 de 6</div>
-        <h2>Fases 4–5: Reglas, Clasificadores y Auditoría Transparente</h2>
-        <p class="header-summary">Comparación de 3 algoritmos sobre clientes futuros reales y análisis crítico frente a la meta inicial.</p>
-      </header>
-      <div class="split-balanced anim d2">
-        <div class="dual-charts" style="grid-template-columns: 1fr; gap:12px;">
-          <div class="chart-card">
-            <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 4: Top reglas de asociación (juego Regency alcanza 18.85× Lift).">
-              <img src="assets/04_reglas_asociacion_lift.png" alt="Reglas de asociación" style="max-height:175px" />
-            </div>
-          </div>
-          <div class="chart-card">
-            <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 5: Curvas ROC y Matriz de Confusión del modelo ganador.">
-              <img src="assets/05_roc_y_confusion.png" alt="ROC y Matriz de Confusión" style="max-height:175px" />
-            </div>
-          </div>
-        </div>
-
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <div class="card">
-            <table class="clean-table">
-              <thead><tr><th>Modelo</th><th>CV AUC</th><th>Holdout AUC</th><th>PR-AUC</th><th>F1</th></tr></thead>
-              <tbody>
-                <tr><td>LogisticRegression</td><td>0.7394</td><td>0.7651</td><td>0.8241</td><td>0.7358</td></tr>
-                <tr class="row-winner"><td>RandomForest (Ganador)</td><td><strong>0.7426</strong></td><td>0.7647</td><td>0.8295</td><td>0.7333</td></tr>
-                <tr><td>HistGradientBoosting</td><td>0.7401</td><td><strong>0.7714</strong></td><td><strong>0.8337</strong></td><td>0.7304</td></tr>
-              </tbody>
-            </table>
           </div>
           <div class="audit-note">
-            <strong>Por qué 0.7647 y no 0.99 artificial:</strong> Predecir si un humano comprará en los próximos 90 días sin usar datos futuros es difícil. Al no hacer trampa, se obtuvo <code>0.7647</code> (RF) y <code>0.7714</code> (HGB) con sólido <strong>PR-AUC (0.83)</strong>, suficiente para priorizar cupones en el grupo <em>En Riesgo</em>.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2.5 EXPLICABILIDAD SHAP -->
-    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 5 · Por Qué Decide el Modelo (SHAP)" style="--slide-color:#7c3aed">
-      <header class="slide-header anim d1">
-        <div class="kicker-sec">02 · Metodología CRISP-DM · Fase 5 de 6 (XAI)</div>
-        <h2>Explicabilidad SHAP: En Qué Se Fija el Modelo Para Predecir</h2>
-        <p class="header-summary">Prueba objetiva de que el modelo sigue la lógica comercial real (antigüedad, gasto y días sin volver).</p>
-      </header>
-      <div class="split-balanced anim d2">
-        <div class="single-chart-wrap">
-          <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 6: Impacto SHAP global sobre las predicciones de recompra a 90 días.">
-            <img src="assets/06_shap_clientes.png" alt="SHAP Clientes" />
-          </div>
-          <p class="chart-caption"><strong>Fig. 6:</strong> Cada fila muestra qué variable pesa más para separar quién vuelve de quién abandona.</p>
-        </div>
-
-        <div class="card">
-          <h3>Peso Real de Cada Variable (|SHAP|)</h3>
-          <div class="bar-chart" style="margin-top:12px">
-            <div class="bar-row"><span class="bar-lbl">Antigüedad (tenure)</span><div class="bar-track"><div class="bar-fill" style="--w:100%"></div></div><span class="bar-num">0.0609</span></div>
-            <div class="bar-row"><span class="bar-lbl">Gasto (monetary)</span><div class="bar-track"><div class="bar-fill" style="--w:77%"></div></div><span class="bar-num">0.0468</span></div>
-            <div class="bar-row"><span class="bar-lbl">Inactividad (recency)</span><div class="bar-track"><div class="bar-fill" style="--w:59%"></div></div><span class="bar-num">0.0360</span></div>
-            <div class="bar-row"><span class="bar-lbl">Boletas (frequency)</span><div class="bar-track"><div class="bar-fill" style="--w:54%"></div></div><span class="bar-num">0.0329</span></div>
-            <div class="bar-row"><span class="bar-lbl">Unidades (items)</span><div class="bar-track"><div class="bar-fill" style="--w:41%"></div></div><span class="bar-num">0.0250</span></div>
-            <div class="bar-row"><span class="bar-lbl">Variedad (unique)</span><div class="bar-track"><div class="bar-fill" style="--w:39%"></div></div><span class="bar-num">0.0236</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2.6 FASE 6: LOS 4 ENTREGABLES DE DESPLIEGUE CRISP-DM -->
-    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 6 · Despliegue, Monitoreo y Revisión" style="--slide-color:#7c3aed">
-      <header class="slide-header anim d1">
-        <div class="kicker-sec">02 · Metodología CRISP-DM · Fase 6 de 6 (Deployment)</div>
-        <h2>Fase 6: Despliegue, Monitoreo, Informe y Revisión</h2>
-        <p class="header-summary">Cubre los 4 entregables formales de CRISP-DM: puesta en producción, mantenimiento, documentación y lecciones aprendidas.</p>
-      </header>
-      <div class="full-body">
-        <div class="card-grid-2 anim d2">
-          <div class="card accent-left">
-            <h3>1. Plan de Despliegue (Producción)</h3>
-            <p>Modelos <code>.joblib</code> y reglas <code>.json</code> expuestos en FastAPI (<code>/predict</code>, <code>/api/recommend</code>), listos en local (<code>127.0.0.1:38420</code>) y nube (<code>render.yaml</code> + GitHub Pages).</p>
-          </div>
-          <div class="card accent-left">
-            <h3>2. Monitoreo y Mantenimiento</h3>
-            <p>Seguimiento en <strong>Gerencia + SQLite</strong> (boletas con IA <code>used_recommendation</code>, bitácora API y cambio estacional) + reentrenamiento con <code>REENTRENAR_MODELO.bat</code> ante desgaste de datos.</p>
-          </div>
-          <div class="card accent-left">
-            <h3>3. Informe Final y Replicabilidad</h3>
-            <p>Documentación de las 6 fases en <code>docs/</code>, notebook reproducible, <code>requirements.txt</code>, hashes <strong>SHA-256</strong> (<code>DATA_VERSION.md</code>) y <code>5/5</code> pruebas <code>pytest</code>.</p>
-          </div>
-          <div class="card accent-left">
-            <h3>4. Revisión del Proyecto (Mejoras)</h3>
-            <p><strong>Logro:</strong> predicción honesta (<code>0.7647</code> sin fuga). <strong>Limitación:</strong> histórico 2011 + SQLite local. <strong>Próximo ciclo:</strong> incorporar feriados como feature y migrar a PostgreSQL.</p>
+            <strong>Revisión final (Iteración 2):</strong> Migrar SQLite local a PostgreSQL persistente, incorporar estacionalidad/feriados como variables históricas y calibrar umbral de decisión por matriz de costo real.
           </div>
         </div>
       </div>
@@ -429,10 +447,10 @@
     <section class="slide slide-title" data-group="99" data-color="#1e293b" data-kind="title" data-title="Cierre — Gracias" style="--slide-color:#1e293b">
       <div class="title-pill anim d1">Cierre</div>
       <h1 class="anim d2">Gracias</h1>
-      <p class="title-sub anim d3">Demostración en vivo lista en <code>http://127.0.0.1:38420</code> (<code>ABRIR_SISTEMA.bat</code>).</p>
+      <p class="title-sub anim d3">Sistema operativo en local (<code>http://127.0.0.1:38420</code> via <code>ABRIR_SISTEMA.bat</code>) y código reproducible en GitHub.</p>
       <div class="cover-meta anim d4">
         <span><strong>Autor:</strong> Uhziel Elí Condori Rojas</span>
-        <span><strong>Proyecto:</strong> NovaMarket Perú (CRISP-DM)</span>
+        <span><strong>Repositorio:</strong> github.com/Uhziel-1/novamarket-peru</span>
       </div>
     </section>
 
