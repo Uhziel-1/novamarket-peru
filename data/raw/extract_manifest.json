@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "data_version": "1.0.0-raw",
+  "extracted_at_utc": "2026-11-26T16:15:00Z",
+  "source_url": "https://raw.githubusercontent.com/databricks/Spark-The-Definitive-Guide/master/data/retail-data/all/online-retail-dataset.csv",
+  "output_file": "data/raw/online_retail.csv",
+  "rows": 541909,
+  "columns": 8,
+  "column_names": [
+    "InvoiceNo",
+    "StockCode",
+    "Description",
+    "Quantity",
+    "InvoiceDate",
+    "UnitPrice",
+    "CustomerID",
+    "Country"
+  ],
+  "sha256": "a2f79bbdd4463df6db8a3f5a50b9c980ae8f645a370bf5e2c0d6097f9e817b05"
+}

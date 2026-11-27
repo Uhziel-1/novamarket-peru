@@ -1,0 +1,104 @@
+{
+  "generated_at_utc": "2026-11-26T16:24:25Z",
+  "seed": 42,
+  "cutoff_date": "2011-09-09",
+  "total_customers_rfm": 3360,
+  "repurchase_rate": 0.5711,
+  "catalog_products": 150,
+  "association_rules_count": 1560,
+  "segment_counts": {
+    "Dormido / Ocasional": 1446,
+    "En Riesgo": 1024,
+    "VIP Campeón": 458,
+    "Cliente Leal": 432
+  },
+  "winner_model": "RandomForestClassifier",
+  "winner_params": {
+    "model__n_estimators": 120,
+    "model__min_samples_leaf": 5,
+    "model__max_depth": 5
+  },
+  "model_comparison": [
+    {
+      "model": "LogisticRegression (Baseline)",
+      "cv_roc_auc": 0.7394,
+      "fit_seconds": 3.36,
+      "best_params": {
+        "model__C": 0.1
+      },
+      "roc_auc": 0.7651,
+      "pr_auc": 0.8241,
+      "f1": 0.7358,
+      "precision": 0.756,
+      "recall": 0.7167,
+      "accuracy": 0.706
+    },
+    {
+      "model": "RandomForestClassifier",
+      "cv_roc_auc": 0.7426,
+      "fit_seconds": 1.86,
+      "best_params": {
+        "model__n_estimators": 120,
+        "model__min_samples_leaf": 5,
+        "model__max_depth": 5
+      },
+      "roc_auc": 0.7647,
+      "pr_auc": 0.8295,
+      "f1": 0.7333,
+      "precision": 0.7578,
+      "recall": 0.7104,
+      "accuracy": 0.7048
+    },
+    {
+      "model": "HistGradientBoostingClassifier",
+      "cv_roc_auc": 0.7401,
+      "fit_seconds": 0.79,
+      "best_params": {
+        "model__min_samples_leaf": 20,
+        "model__max_iter": 200,
+        "model__max_depth": 3,
+        "model__learning_rate": 0.03
+      },
+      "roc_auc": 0.7714,
+      "pr_auc": 0.8337,
+      "f1": 0.7304,
+      "precision": 0.7539,
+      "recall": 0.7083,
+      "accuracy": 0.7012
+    }
+  ],
+  "top_shap_importance": [
+    {
+      "feature": "tenure_days",
+      "mean_abs_shap": 0.0609
+    },
+    {
+      "feature": "monetary",
+      "mean_abs_shap": 0.0468
+    },
+    {
+      "feature": "recency_days",
+      "mean_abs_shap": 0.036
+    },
+    {
+      "feature": "frequency",
+      "mean_abs_shap": 0.0329
+    },
+    {
+      "feature": "total_items",
+      "mean_abs_shap": 0.025
+    },
+    {
+      "feature": "unique_products",
+      "mean_abs_shap": 0.0236
+    },
+    {
+      "feature": "avg_basket_value",
+      "mean_abs_shap": 0.0133
+    },
+    {
+      "feature": "purchase_velocity",
+      "mean_abs_shap": 0.0109
+    }
+  ]
+}

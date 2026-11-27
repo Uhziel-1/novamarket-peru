@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NovaMarket Perú | Tienda Online &amp; Inteligencia Comercial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+
+  <!-- ==================== HEADER PRINCIPAL ==================== -->
+  <header class="site-header">
+    <div class="header-main">
+      <div class="container header-main-row">
+        <button type="button" id="brandLogoBtn" class="brand-logo" title="Ir al inicio de la tienda">
+          <span class="brand-mark">NM</span>
+          <span class="brand-word">NovaMarket<strong>.pe</strong></span>
+        </button>
+
+        <div class="deliver-box" title="Tipo de cambio actualizado vía API externa open.er-api.com">
+          <span class="deliver-kicker">Envío a Perú · Tipo de cambio</span>
+          <strong id="fxBadge" class="deliver-val">1 USD = S/ --</strong>
+        </div>
+
+        <form id="searchForm" class="search-shell" role="search">
+          <select id="categorySelect" class="search-cat" aria-label="Filtrar por categoría">
+            <option value="">Todas</option>
+          </select>
+          <input id="searchInput" type="search" class="search-input" placeholder="Buscar productos (presiona Enter, ej. teacup, taza, tecup, bag)..." autocomplete="off" />
+          <button type="submit" class="search-submit" title="Buscar (Enter)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </button>
+        </form>
+
+        <button type="button" id="auditToggleBtn" class="audit-switch-btn" aria-pressed="false" title="Activa para ver cálculos internos de Minería de Datos dentro de la tienda">
+          <span class="audit-dot"></span>
+          <span id="auditToggleLabel">Modo Auditoría IA: OFF</span>
+        </button>
+
+        <button type="button" id="openCartBtn" class="cart-trigger" aria-label="Abrir carrito">
+          <span class="cart-ico">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+            <span id="cartBadgeCount" class="cart-count">0</span>
+          </span>
+          <span class="cart-label">Carrito</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="header-sub">
+      <div class="container header-sub-row">
+        <nav class="main-nav" aria-label="Vistas del sistema">
+          <button type="button" class="nav-tab active" data-tab="tienda" id="navHomeBtn">🛍️ Tienda (Cliente)</button>
+          <button type="button" class="nav-tab" data-tab="gerencia">🏢 Gerencia &amp; Proyecciones</button>
+          <button type="button" class="nav-tab" data-tab="clientes">🎯 Predictor RFM (Interno)</button>
+        </nav>
+
+        <div id="categoryChips" class="sub-cat-chips" aria-label="Categorías rápidas"></div>
+
+        <div class="sub-right">
+          <span id="holidayBadge" class="holiday-pill" title="API Externa date.nager.at">Calendario PE: --</span>
+          <a href="/docs" target="_blank" rel="noopener noreferrer" class="docs-link">API /docs ↗</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- FRANJA DE AUDITORÍA IA (OCULTA POR DEFECTO EN VISTA CLIENTE, SE MUESTRA AL ACTIVAR EL MODO AUDITORÍA) -->
+  <div id="auditContextBar" class="audit-context-bar" hidden>
+    <div class="container audit-context-row">
+      <div class="audit-ctx-left">
+        <span class="audit-pill-tag">AUDITORÍA INTERNA ACTIVA</span>
+        <label for="cartCustomerSelect">Simular perfil de comprador:</label>
+        <select id="cartCustomerSelect" class="audit-cust-select" aria-label="Perfil de comprador"></select>
+        <span id="cartCustSeg" class="seg-badge">--</span>
+        <span class="ctx-metric">Prob. Recompra: <strong id="cartCustProb">-- %</strong></span>
+      </div>
+      <div id="cartCustAction" class="audit-ctx-advice">--</div>
+    </div>
+  </div>
+
+  <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+  <main class="container page-main">
+
+    <!-- ==================== VISTA 1: TIENDA CLIENTE ==================== -->
+    <section id="tab-tienda" class="tab-panel active">
+
+      <!-- 1A: CATÁLOGO DE PRODUCTOS -->
+      <div id="storeCatalogView">
+        <div class="store-hero-strip">
+          <div>
+            <h1 id="catalogHeading">Productos destacados en NovaMarket Perú</h1>
+            <p id="catalogCount" class="catalog-sub">Cargando catálogo de la tienda...</p>
+          </div>
+          <div class="hero-tags">
+            <span class="info-tag">Presiona Enter para buscar (acepta español y errores de tipeo)</span>
+          </div>
+        </div>
+
+        <!-- Banner dinámico cuando se detecta corrección aproximada o respaldo promocional -->
+        <div id="searchSuggestionBanner" class="search-suggestion-banner" hidden></div>
+
+        <div id="productGrid" class="product-grid"></div>
+      </div>
+
+      <!-- 1B: DETALLE DEL PRODUCTO + RECOMENDACIONES DEBAJO -->
+      <div id="productDetailView" hidden>
+        <div class="detail-topbar">
+          <button type="button" id="backToCatalogBtn" class="btn-back">← Volver al catálogo</button>
+          <div id="detailBreadcrumb" class="breadcrumb">Inicio › Categoría › Producto</div>
+        </div>
+
+        <article class="detail-card">
+          <div class="detail-gallery">
+            <div id="detailVisual" class="detail-visual"></div>
+            <div class="detail-sku-note">Código SKU: <strong id="detailSku">--</strong></div>
+          </div>
+
+          <div class="detail-info">
+            <span id="detailCategoryPill" class="detail-cat-link">Categoría</span>
+            <h1 id="detailTitle" class="detail-title">Nombre del producto</h1>
+
+            <div class="detail-rating-row">
+              <span class="stars">★★★★★</span>
+              <span id="detailStats" class="rating-meta">Valorado por compradores verificados</span>
+            </div>
+
+            <hr class="detail-divider" />
+
+            <div class="detail-price-block">
+              <div class="detail-price-pen" id="detailPricePen">S/ --</div>
+              <div class="detail-price-usd" id="detailPriceUsd">Equivalente internacional: $-- USD</div>
+            </div>
+
+            <div class="detail-specs">
+              <h3>Detalles del producto</h3>
+              <ul>
+                <li><strong>Categoría:</strong> <span id="detailSpecCat">--</span></li>
+                <li><strong>Historial comprobado:</strong> <span id="detailSpecPop">--</span></li>
+                <li><strong>Disponibilidad:</strong> En stock · Despacho inmediato a todo el Perú</li>
+                <li><strong>Conversión automática:</strong> Precio actualizado con tipo de cambio vigente</li>
+              </ul>
+            </div>
+
+            <div class="detail-buy-box">
+              <div class="qty-row">
+                <label for="detailQty">Cantidad:</label>
+                <select id="detailQty" class="qty-select">
+                  <option value="1" selected>1 unidad</option>
+                  <option value="2">2 unidades</option>
+                  <option value="3">3 unidades</option>
+                  <option value="4">4 unidades</option>
+                  <option value="5">5 unidades</option>
+                </select>
+              </div>
+              <div class="detail-cta-row">
+                <button type="button" id="detailAddBtn" class="btn-amazon-amber">Agregar al carrito</button>
+                <button type="button" id="detailBuyNowBtn" class="btn-amazon-orange">Agregar e ir al carrito</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- RECOMENDACIONES JUSTO DEBAJO DEL PRODUCTO (SIEMPRE PROMOCIONA 4 PRODUCTOS) -->
+        <section class="detail-reco-section">
+          <div class="reco-section-head">
+            <div>
+              <h2>Clientes que compraron este producto también llevaron</h2>
+              <p id="detailRecoSub" class="reco-sub">Sugerencias seleccionadas para complementar tu compra</p>
+            </div>
+            <span id="detailRecoMode" class="ml-badge" hidden>Reglas de Asociación</span>
+          </div>
+
+          <!-- Caja explicativa interna (visible SOLO en Modo Auditoría IA) -->
+          <div id="detailAuditExplainer" class="audit-explainer-box" hidden></div>
+
+          <div id="detailRecoGrid" class="reco-cards-grid"></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ==================== VISTA 2: PANEL INTERNO EMPRESA (GERENCIA Y PROYECCIONES) ==================== -->
+    <section id="tab-gerencia" class="tab-panel">
+      <div class="page-title-bar">
+        <div>
+          <h1>Panel Interno de Gerencia · Pasado, Presente y Proyección</h1>
+          <p>Vista exclusiva para el negocio y nuevos practicantes: inventario real, proyecciones de ingresos, retorno de la Minería de Datos y registro de APIs.</p>
+        </div>
+      </div>
+
+      <!-- 1. KPIs con explicación clara debajo de cada número -->
+      <div class="kpi-grid-4">
+        <div class="kpi-card">
+          <span>Catálogo Activo / Histórico</span>
+          <strong id="kpiCatalogSkus">--</strong>
+          <small class="kpi-help">Top productos activos usados en vitrina de 3,665 SKUs totales.</small>
+        </div>
+        <div class="kpi-card">
+          <span>Facturación Histórica Limpia</span>
+          <strong id="kpiTotalRevenue">--</strong>
+          <small class="kpi-help">Suma de 397,884 líneas válidas en 18,532 boletas (sin devoluciones).</small>
+        </div>
+        <div class="kpi-card">
+          <span>Reglas de Venta Cruzada</span>
+          <strong id="kpiRules">--</strong>
+          <small class="kpi-help">Pares con Confianza ≥ 15 % y Lift ≥ 1.5× que impulsan el carrito.</small>
+        </div>
+        <div class="kpi-card accent">
+          <span>Boletas Emitidas Hoy (SQLite)</span>
+          <strong id="kpiNewBoletas">0</strong>
+          <small class="kpi-help" id="kpiSqlSub">Registra si el cliente aceptó o no recomendación IA.</small>
+        </div>
+      </div>
+
+      <!-- 2. PROYECCIÓN PASADO -> PRESENTE -> FUTURO + SIMULADOR DE IMPACTO -->
+      <div class="projection-layout">
+        <div class="surface-card">
+          <div class="card-head-flex">
+            <div>
+              <h2>Evolución Real (Pasado) y Proyección a 3 Meses (Futuro)</h2>
+              <p class="card-sub">Comparativa entre seguir operando sin analítica vs. activar el Recomendador en tienda y rescatar clientes En Riesgo.</p>
+            </div>
+            <span class="info-tag">Histórico Dic 2010 – Nov 2011 + Simulación Q1</span>
+          </div>
+          <div class="chart-wrap tall"><canvas id="chartProjection"></canvas></div>
+          <p class="chart-footnote">Nota transparente: diciembre 2011 cubre solo del 1 al 9 de diciembre ($518k parciales); para proyectar los próximos 3 meses sin sesgo se toma el promedio mensual reciente de los últimos meses completos (Sep–Nov 2011).</p>
+        </div>
+
+        <div class="surface-card simulator-card">
+          <h2>Simulador de Beneficio Económico (ROI)</h2>
+          <p class="card-sub">Mueve los controles para ver cuánto dinero adicional aporta la Minería de Datos al trimestre proyectado.</p>
+
+          <div class="sim-control">
+            <div class="sim-label-row">
+              <label for="simUpsellPct">Adopción del Recomendador en caja:</label>
+              <strong id="simUpsellVal">15 %</strong>
+            </div>
+            <input id="simUpsellPct" type="range" min="0" max="40" step="1" value="15" />
+            <small>Porcentaje de boletas que agregan un complemento sugerido (aumento estimado de ~18 % en el ticket de esas boletas).</small>
+          </div>
+
+          <div class="sim-control">
+            <div class="sim-label-row">
+              <label for="simRescuePct">Rescate de clientes "En Riesgo" (1,024):</label>
+              <strong id="simRescueVal">12 %</strong>
+            </div>
+            <input id="simRescuePct" type="range" min="0" max="35" step="1" value="12" />
+            <small>Porcentaje de clientes detectados en riesgo de fuga que vuelven gracias a un cupón dirigido de 10–15 %.</small>
+          </div>
+
+          <div class="sim-results-box">
+            <div class="sim-res-row">
+              <span>Proyección Base (Sin IA / 3 meses):</span>
+              <strong id="simBaseTotal">$--</strong>
+            </div>
+            <div class="sim-res-row highlight">
+              <span>Aporte Venta Cruzada (Reglas):</span>
+              <strong id="simUpsellGain">+$--</strong>
+            </div>
+            <div class="sim-res-row highlight">
+              <span>Aporte Retención (Predictor RFM):</span>
+              <strong id="simRescueGain">+$--</strong>
+            </div>
+            <hr class="detail-divider" />
+            <div class="sim-res-total">
+              <span>Ingreso Adicional Estimado (Trimestre):</span>
+              <strong id="simTotalExtraPen">S/ --</strong>
+              <small id="simTotalExtraUsd">+$-- USD en 3 meses</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. DESGLOSE DE PRODUCTOS POR CATEGORÍA + SEGMENTOS RFM CON ACCIÓN DE NEGOCIO -->
+      <div class="charts-grid-2" style="margin-top:20px">
+        <div class="surface-card">
+          <h2>Qué vende NovaMarket.pe (Desglose de 150 SKUs Activos)</h2>
+          <p class="card-sub">Visibilidad completa del catálogo por categoría, volumen histórico y precio promedio.</p>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Categoría</th>
+                  <th>Productos (SKU)</th>
+                  <th>Unidades Históricas</th>
+                  <th>Precio Promedio</th>
+                </tr>
+              </thead>
+              <tbody id="categoryInventoryBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="surface-card">
+          <h2>Segmentos de Clientes (K-Means) y Qué Hacer con Cada Uno</h2>
+          <p class="card-sub">Métricas reales de los 3,360 clientes antes de la fecha de corte (`2011-09-09`).</p>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Segmento</th>
+                  <th>Clientes</th>
+                  <th>Gasto Prom.</th>
+                  <th>Recompra Real</th>
+                  <th>Estrategia Recomendada</th>
+                </tr>
+              </thead>
+              <tbody id="segmentStrategyBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. BITÁCORA EN VIVO DE APIS + GUÍA RÁPIDA PARA PRACTICANTES -->
+      <div class="charts-grid-2" style="margin-top:20px">
+        <div class="surface-card">
+          <h2>Bitácora de Llamadas API en esta Sesión</h2>
+          <p class="card-sub">Muestra exactamente cuándo se llamó cada API, por qué motivo y qué respondió.</p>
+          <div class="table-scroll" style="max-height:300px">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Hora</th>
+                  <th>API / Endpoint</th>
+                  <th>Para qué se llamó</th>
+                  <th>Resultado</th>
+                </tr>
+              </thead>
+              <tbody id="apiLogBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="surface-card">
+          <h2>Guía Rápida para Practicantes (Qué significa cada métrica)</h2>
+          <p class="card-sub">Referencia directa para interpretar todo el sistema sin depender de memoria.</p>
+          <ul class="glossary-list">
+            <li><strong>Confianza (Reglas):</strong> Si 100 clientes compran el producto A y 83 también llevan B en la misma boleta, Confianza = <code>83 %</code>.</li>
+            <li><strong>Lift (Reglas):</strong> Cuántas veces más probable es llevar B junto con A respecto a comprarlo al azar. <code>Lift &gt; 1.5×</code> es asociación útil.</li>
+            <li><strong>Recency / Frequency / Monetary:</strong> Días sin comprar / cuántas boletas acumula / gasto total en USD.</li>
+            <li><strong>ROC-AUC (<code>0.7647</code>) y PR-AUC (<code>0.8295</code>):</strong> Capacidad del modelo para ordenar quién sí volverá a comprar en los siguientes 90 días reales.</li>
+            <li><strong>Tipo de Cambio y Feriados (APIs externas):</strong> Protege márgenes ante variaciones del dólar y alerta fechas clave en Perú.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 5. BOLETAS REGISTRADAS EN SQLITE -->
+      <div class="surface-card" style="margin-top:20px">
+        <div class="table-head">
+          <div>
+            <h2>Boletas Registradas en SQLite (<code>data/novamarket.db</code>)</h2>
+            <p class="card-sub">Mide en vivo cuántas ventas reales incorporaron productos sugeridos por el Recomendador.</p>
+          </div>
+          <span id="boletasTotalBadge" class="info-tag">Total: $0.00 / S/ 0.00</span>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Boleta #</th>
+                <th>Cliente ID</th>
+                <th>Segmento RFM</th>
+                <th>Ítems</th>
+                <th>Usó Recomendador</th>
+                <th>Total USD</th>
+                <th>Total PEN</th>
+                <th>Tasa Cambio</th>
+                <th>Fecha UTC</th>
+              </tr>
+            </thead>
+            <tbody id="boletasTableBody">
+              <tr><td colspan="9" class="empty-cell">Aún no se han registrado boletas en SQLite.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VISTA 3: EVALUADOR RFM (INTERNO) ==================== -->
+    <section id="tab-clientes" class="tab-panel">
+      <div class="page-title-bar">
+        <div>
+          <h1>Predictor Individual de Cliente (Uso Interno · Retención)</h1>
+          <p>Permite al equipo comercial evaluar a un cliente específico con <code>K-Means</code> + <code>RandomForestClassifier</code> para decidir si requiere cupón o venta cruzada.</p>
+        </div>
+      </div>
+
+      <div class="rfm-layout">
+        <div class="surface-card">
+          <h2>Parámetros históricos del cliente</h2>
+          <p class="card-sub">Cada campo incluye su interpretación operativa para que cualquier integrante del equipo entienda qué ingresar.</p>
+
+          <div id="presetCustChips" class="preset-chips"></div>
+
+          <div class="rfm-form-grid">
+            <div class="form-field">
+              <label for="fRecency">Recency (días sin comprar)</label>
+              <input id="fRecency" type="number" min="0" max="500" value="12" />
+              <small>Más alto = cliente más inactivo o en enfriamiento.</small>
+            </div>
+            <div class="form-field">
+              <label for="fFreq">Frequency (boletas previas)</label>
+              <input id="fFreq" type="number" min="1" max="500" value="14" />
+              <small>Número total de compras anteriores completadas.</small>
+            </div>
+            <div class="form-field">
+              <label for="fMonetary">Monetary (gasto total USD)</label>
+              <input id="fMonetary" type="number" min="1" step="10" value="4200" />
+              <small>Suma histórica comprada por el cliente.</small>
+            </div>
+            <div class="form-field">
+              <label for="fItems">Total unidades compradas</label>
+              <input id="fItems" type="number" min="1" value="850" />
+              <small>Cantidad acumulada de artículos adquiridos.</small>
+            </div>
+            <div class="form-field">
+              <label for="fUnique">Productos distintos</label>
+              <input id="fUnique" type="number" min="1" value="65" />
+              <small>Variedad de catálogo explorada por el cliente.</small>
+            </div>
+            <div class="form-field">
+              <label for="fTenure">Antigüedad (días)</label>
+              <input id="fTenure" type="number" min="0" value="220" />
+              <small>Tiempo transcurrido desde su primera compra.</small>
+            </div>
+            <div class="form-field">
+              <label for="fCancels">Cancelaciones previas</label>
+              <input id="fCancels" type="number" min="0" value="0" />
+              <small>Boletas devueltas o anuladas antes del corte.</small>
+            </div>
+            <div class="form-field">
+              <label for="fMarket">Mercado</label>
+              <select id="fMarket">
+                <option value="UK">UK</option>
+                <option value="Internacional" selected>Internacional</option>
+              </select>
+              <small>Origen geográfico del comprador.</small>
+            </div>
+          </div>
+
+          <button type="button" id="predictCustBtn" class="btn-primary-action">
+            Calcular Segmento y Probabilidad de Recompra (POST /predict) →
+          </button>
+        </div>
+
+        <div class="surface-card result-card">
+          <div class="result-top">
+            <span id="rfmSegOut" class="seg-badge lg">VIP Campeón</span>
+            <span id="rfmLatency" class="latency-tag">-- ms</span>
+          </div>
+
+          <div class="score-boxes">
+            <div class="score-tile ok">
+              <span>Probabilidad de volver (90 días)</span>
+              <strong id="rfmProbRecompra">-- %</strong>
+            </div>
+            <div class="score-tile warn">
+              <span>Riesgo de abandono (Fuga)</span>
+              <strong id="rfmProbFuga">-- %</strong>
+            </div>
+          </div>
+
+          <div class="progress-track">
+            <div id="rfmMeterFill" class="progress-fill" style="width:0%"></div>
+          </div>
+
+          <h3 id="rfmNivelOut" class="nivel-heading">--</h3>
+          <ul id="rfmFactorsOut" class="factors-list"></ul>
+          <div id="rfmActionOut" class="action-banner">
+            Selecciona un cliente o pulsa el botón para obtener la decisión comercial.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== DRAWER DEL CARRITO ==================== -->
+  <div id="cartBackdrop" class="drawer-backdrop" hidden></div>
+  <aside id="cartDrawer" class="cart-drawer" aria-label="Carrito de compras" hidden>
+    <div class="drawer-header">
+      <h2>🛒 Tu Carrito (<span id="drawerCount">0</span>)</h2>
+      <div class="drawer-header-actions">
+        <button type="button" id="clearCartBtn" class="btn-text">Vaciar</button>
+        <button type="button" id="closeCartBtn" class="btn-close" aria-label="Cerrar carrito">✕</button>
+      </div>
+    </div>
+
+    <div class="drawer-body">
+      <div id="cartItemsList" class="cart-items-list">
+        <p class="empty-cart-msg">Tu carrito está vacío. Explora el catálogo para agregar productos.</p>
+      </div>
+
+      <div class="drawer-reco-box">
+        <div class="drawer-reco-head">
+          <strong>También te puede interesar</strong>
+          <span id="recoModeBadge" class="ml-badge sm" hidden>Recomendados</span>
+        </div>
+        <div id="recoList" class="drawer-reco-list"></div>
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <div class="totals-row">
+        <span>Subtotal USD</span>
+        <strong id="totalUsd">$0.00</strong>
+      </div>
+      <div class="totals-row pen">
+        <span>Total a pagar (Soles PEN)</span>
+        <strong id="totalPen">S/ 0.00</strong>
+      </div>
+      <button type="button" id="checkoutBtn" class="btn-amazon-orange full" disabled>
+        Finalizar compra →
+      </button>
+      <div id="checkoutFeedback" class="checkout-feedback"></div>
+    </div>
+  </aside>
+
+  <div id="toastNotice" class="toast-notice" hidden></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+/* Estilos específicos para la presentación de NovaMarket Perú (optimizada para pantalla y PDF) */
+
+.flow-strip.flow-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.flow-num {
+  display: inline-block;
+  font-size: calc(0.76rem * var(--scale-meta));
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--slide-color, var(--c-sec1));
+  margin-bottom: 4px;
+}
+
+.dual-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chart-img-wrap {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-alt);
+  border-radius: 10px;
+  padding: 6px;
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+.chart-img-wrap img {
+  width: 100%;
+  max-height: 315px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.single-chart-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.single-chart-wrap .chart-img-wrap img {
+  max-height: 390px;
+}
+
+.chart-caption {
+  font-size: calc(0.94rem * var(--scale-meta));
+  color: var(--muted);
+  font-weight: 600;
+  line-height: 1.38;
+}
+
+/* Centrado vertical real tanto en columnas como en cuerpo completo */
+.full-body {
+  justify-content: center;
+  gap: 20px;
+}
+
+.full-body .card,
+.split-balanced .card {
+  padding: 20px 22px;
+}
+
+.split-balanced {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 24px;
+  align-items: center;
+  align-content: center;
+}
+
+/* Tarjetas KPI compactas */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.kpi-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--slide-color, var(--c-sec1));
+  border-radius: 12px;
+  padding: 11px 14px;
+  box-shadow: var(--shadow);
+}
+
+.kpi-val {
+  font-size: calc(1.42rem * var(--scale-title));
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.15;
+}
+
+.kpi-lbl {
+  margin-top: 3px;
+  font-size: calc(0.84rem * var(--scale-meta));
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Demo interactiva (/predict) */
+.demo-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.preset-btn {
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 6px 13px;
+  font-size: calc(0.86rem * var(--scale-meta));
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.preset-btn.active,
+.preset-btn:hover {
+  border-color: var(--c-sec1);
+  background: color-mix(in srgb, var(--c-sec1) 12%, var(--surface));
+  color: var(--c-sec1);
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.demo-field {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.demo-field label {
+  font-size: calc(0.78rem * var(--scale-meta));
+  font-weight: 700;
+  color: var(--muted);
+  font-family: Consolas, monospace;
+}
+
+.demo-field input,
+.demo-field select {
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: calc(1rem * var(--scale-body));
+  font-weight: 700;
+  outline: none;
+  width: 100%;
+}
+
+.demo-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.btn-demo {
+  background: var(--c-sec1);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-size: calc(0.92rem * var(--scale-meta));
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-demo:hover {
+  filter: brightness(1.07);
+}
+
+.demo-status {
+  font-size: calc(0.84rem * var(--scale-meta));
+  color: var(--muted);
+  font-family: Consolas, monospace;
+}
+
+.prob-hero {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.prob-big {
+  font-size: calc(2.2rem * var(--scale-title));
+  font-weight: 900;
+  color: var(--c-sec1);
+  line-height: 1;
+}
+
+.seg-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: calc(0.86rem * var(--scale-meta));
+  font-weight: 800;
+  border: 1px solid color-mix(in srgb, var(--c-sec1) 35%, transparent);
+  background: color-mix(in srgb, var(--c-sec1) 10%, var(--surface));
+  color: var(--c-sec1);
+}
+
+.seg-badge.risk {
+  border-color: rgba(220, 38, 38, 0.35);
+  background: rgba(220, 38, 38, 0.09);
+  color: #dc2626;
+}
+
+/* Tablas limpias */
+.clean-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: calc(0.92rem * var(--scale-body));
+}
+
+.clean-table th,
+.clean-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.clean-table th {
+  font-size: calc(0.82rem * var(--scale-meta));
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  background: var(--surface-alt);
+}
+
+.row-winner {
+  background: color-mix(in srgb, var(--slide-color, #7c3aed) 8%, transparent);
+  font-weight: 700;
+}
+
+.audit-note {
+  background: color-mix(in srgb, #d97706 10%, var(--surface));
+  border-left: 4px solid #d97706;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: calc(0.92rem * var(--scale-body));
+  line-height: 1.44;
+}
+
+@media screen and (max-width: 1050px) {
+  .flow-strip.flow-4,
+  .dual-charts,
+  .split-balanced,
+  .kpi-strip,
+  .demo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .preset-row,
+  .demo-actions {
+    display: none !important;
+  }
+}

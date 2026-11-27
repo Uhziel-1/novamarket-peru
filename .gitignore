@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+*.db
+*.sqlite3
+.DS_Store
+*.log
+
+# CSVs pesados (>35 MB): se regeneran con src/extract_data.py y src/train.py
+data/raw/*.csv
+data/processed/retail_clean_transactions.csv

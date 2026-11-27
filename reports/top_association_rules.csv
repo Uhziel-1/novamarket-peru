@@ -1,0 +1,51 @@
+antecedent,antecedent_name,consequent,consequent_name,consequent_category,consequent_price_usd,co_purchases,support,confidence,lift
+22698,Pink Regency Teacup And Saucer,22697,Green Regency Teacup And Saucer,Cocina y Mesa,2.95,460,0.0292,0.8273,18.85
+22697,Green Regency Teacup And Saucer,22698,Pink Regency Teacup And Saucer,Cocina y Mesa,2.95,460,0.0292,0.6657,18.85
+22866,Hand Warmer Scotty Dog Design,22867,Hand Warmer Bird Design,Accesorios y Varios,2.1,240,0.0152,0.5096,16.92
+22867,Hand Warmer Bird Design,22866,Hand Warmer Scotty Dog Design,Accesorios y Varios,2.1,240,0.0152,0.5063,16.92
+22866,Hand Warmer Scotty Dog Design,22865,Hand Warmer Owl Design,Accesorios y Varios,2.1,281,0.0178,0.5966,16.42
+22865,Hand Warmer Owl Design,22866,Hand Warmer Scotty Dog Design,Accesorios y Varios,2.1,281,0.0178,0.4913,16.42
+22698,Pink Regency Teacup And Saucer,22699,Roses Regency Teacup And Saucer,Cocina y Mesa,2.95,436,0.0277,0.7842,15.77
+22699,Roses Regency Teacup And Saucer,22698,Pink Regency Teacup And Saucer,Cocina y Mesa,2.95,436,0.0277,0.5568,15.77
+22697,Green Regency Teacup And Saucer,22699,Roses Regency Teacup And Saucer,Cocina y Mesa,2.95,541,0.0344,0.7829,15.74
+22699,Roses Regency Teacup And Saucer,22697,Green Regency Teacup And Saucer,Cocina y Mesa,2.95,541,0.0344,0.6909,15.74
+22867,Hand Warmer Bird Design,22865,Hand Warmer Owl Design,Accesorios y Varios,2.1,267,0.017,0.5633,15.5
+22865,Hand Warmer Owl Design,22867,Hand Warmer Bird Design,Accesorios y Varios,2.1,267,0.017,0.4668,15.5
+22630,Dolly Girl Lunch Box,22629,Spaceboy Lunch Box,Bolsos y Viaje,1.95,424,0.0269,0.6883,15.39
+22629,Spaceboy Lunch Box,22630,Dolly Girl Lunch Box,Bolsos y Viaje,1.95,424,0.0269,0.6023,15.39
+23300,Gardeners Kneeling Pad Cup Of Tea,23301,Gardeners Kneeling Pad Keep Calm,Accesorios y Varios,1.65,463,0.0294,0.7291,15.18
+23301,Gardeners Kneeling Pad Keep Calm,23300,Gardeners Kneeling Pad Cup Of Tea,Cocina y Mesa,1.65,463,0.0294,0.6124,15.18
+22328,Round Snack Boxes Set Of 4 Fruits,22326,Round Snack Boxes Set Of4 Woodland,Accesorios y Varios,2.95,262,0.0166,0.5721,15.14
+22326,Round Snack Boxes Set Of4 Woodland,22328,Round Snack Boxes Set Of 4 Fruits,Accesorios y Varios,2.95,262,0.0166,0.4403,15.14
+20971,Pink Blue Felt Craft Trinket Box,20972,Pink Cream Felt Craft Trinket Box,Accesorios y Varios,1.25,235,0.0149,0.5142,15.13
+20972,Pink Cream Felt Craft Trinket Box,20971,Pink Blue Felt Craft Trinket Box,Accesorios y Varios,1.25,235,0.0149,0.4393,15.13
+22625,Red Kitchen Scales,22624,Ivory Kitchen Scales,Cocina y Mesa,8.5,265,0.0168,0.5915,15.02
+22624,Ivory Kitchen Scales,22625,Red Kitchen Scales,Cocina y Mesa,8.5,265,0.0168,0.4274,15.02
+23322,Large White Heart Of Wicker,23321,Small White Heart Of Wicker,Hogar y Decoración,1.65,281,0.0178,0.5499,14.88
+23321,Small White Heart Of Wicker,23322,Large White Heart Of Wicker,Hogar y Decoración,2.95,281,0.0178,0.4828,14.88
+21914,Blue Harmonica In Box,21915,Red  Harmonica In Box,Accesorios y Varios,1.25,272,0.0173,0.5261,14.76
+21915,Red  Harmonica In Box,21914,Blue Harmonica In Box,Accesorios y Varios,1.25,272,0.0173,0.4848,14.76
+84380,Set Of 3 Butterfly Cookie Cutters,84378,Set Of 3 Heart Cookie Cutters,Hogar y Decoración,1.25,243,0.0154,0.488,14.75
+84378,Set Of 3 Heart Cookie Cutters,84380,Set Of 3 Butterfly Cookie Cutters,Accesorios y Varios,1.25,243,0.0154,0.4664,14.75
+22555,Plasters In Tin Strongman,22556,Plasters In Tin Circus Parade,Cocina y Mesa,1.65,219,0.0139,0.4878,14.74
+22556,Plasters In Tin Circus Parade,22555,Plasters In Tin Strongman,Cocina y Mesa,1.65,219,0.0139,0.4203,14.74
+23200,Jumbo Bag Pears,23199,Jumbo Bag Apples,Bolsos y Viaje,2.08,312,0.0198,0.6638,14.56
+23199,Jumbo Bag Apples,23200,Jumbo Bag Pears,Bolsos y Viaje,2.08,312,0.0198,0.4345,14.56
+22356,Charlotte Bag Pink Polkadot,20724,Red Retrospot Charlotte Bag,Bolsos y Viaje,0.85,322,0.0205,0.6612,14.09
+20724,Red Retrospot Charlotte Bag,22356,Charlotte Bag Pink Polkadot,Bolsos y Viaje,0.85,322,0.0205,0.4357,14.09
+22356,Charlotte Bag Pink Polkadot,20723,Strawberry Charlotte Bag,Bolsos y Viaje,0.85,209,0.0133,0.4292,13.73
+20723,Strawberry Charlotte Bag,22356,Charlotte Bag Pink Polkadot,Bolsos y Viaje,0.85,209,0.0133,0.4248,13.73
+21928,Jumbo Bag Scandinavian Blue Paisley,21929,Jumbo Bag Pink Vintage Paisley,Bolsos y Viaje,2.08,282,0.0179,0.5203,13.61
+21929,Jumbo Bag Pink Vintage Paisley,21928,Jumbo Bag Scandinavian Blue Paisley,Bolsos y Viaje,2.08,282,0.0179,0.4684,13.61
+22551,Plasters In Tin Spaceboy,22554,Plasters In Tin Woodland Animals,Cocina y Mesa,1.65,292,0.0185,0.5043,13.53
+22554,Plasters In Tin Woodland Animals,22551,Plasters In Tin Spaceboy,Cocina y Mesa,1.65,292,0.0185,0.4974,13.53
+22556,Plasters In Tin Circus Parade,22554,Plasters In Tin Woodland Animals,Cocina y Mesa,1.65,256,0.0163,0.4914,13.18
+22554,Plasters In Tin Woodland Animals,22556,Plasters In Tin Circus Parade,Cocina y Mesa,1.65,256,0.0163,0.4361,13.18
+20723,Strawberry Charlotte Bag,20719,Woodland Charlotte Bag,Bolsos y Viaje,0.85,214,0.0136,0.435,12.9
+20719,Woodland Charlotte Bag,20723,Strawberry Charlotte Bag,Bolsos y Viaje,0.85,214,0.0136,0.403,12.9
+22952,60 Cake Cases Vintage Christmas,22909,Set Of 20 Vintage Christmas Napkins,Regalos y Eventos,0.85,187,0.0119,0.4004,12.89
+22909,Set Of 20 Vintage Christmas Napkins,22952,60 Cake Cases Vintage Christmas,Cocina y Mesa,0.55,187,0.0119,0.3824,12.89
+22730,Alarm Clock Bakelike Ivory,22728,Alarm Clock Bakelike Pink,Hogar y Decoración,3.75,234,0.0149,0.5,12.84
+22728,Alarm Clock Bakelike Pink,22730,Alarm Clock Bakelike Ivory,Hogar y Decoración,3.75,234,0.0149,0.3817,12.84
+22835,Hot Water Bottle I Am So Poorly,22112,Chocolate Hot Water Bottle,Accesorios y Varios,4.95,288,0.0183,0.5703,12.83
+22112,Chocolate Hot Water Bottle,22835,Hot Water Bottle I Am So Poorly,Accesorios y Varios,4.95,288,0.0183,0.4114,12.83

@@ -1,0 +1,76 @@
+/* =========================================================
+   PATRONES DE ANIMACIÓN DIDÁCTICA (ESTILO PROPIO)
+   Respetan automáticamente [data-anim="off"] y @media print
+   ========================================================= */
+
+/* 1. Flujo secuencial iluminado por etapas */
+.slide.active .flow-anim .flow-node {
+  animation: nodeReveal 0.5s cubic-bezier(.22,1,.36,1) both;
+}
+.slide.active .flow-anim .flow-node:nth-child(1) { animation-delay: 0.08s; }
+.slide.active .flow-anim .flow-node:nth-child(2) { animation-delay: 0.22s; }
+.slide.active .flow-anim .flow-node:nth-child(3) { animation-delay: 0.36s; }
+.slide.active .flow-anim .flow-node:nth-child(4) { animation-delay: 0.50s; }
+.slide.active .flow-anim .flow-node:nth-child(5) { animation-delay: 0.64s; }
+
+@keyframes nodeReveal {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 2. Trazo SVG progresivo para diagramas de flujo, AST o redes */
+.svg-draw {
+  stroke-dasharray: 420;
+  stroke-dashoffset: 420;
+}
+.slide.active .svg-draw {
+  animation: drawLine 0.9s ease forwards;
+  animation-delay: var(--d, 0.2s);
+}
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+
+/* 3. Pulso sutil para destacar el nodo/regla clave en la explicación */
+.pulse-accent {
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--slide-color, #2563eb) 35%, transparent);
+  animation: pulseRing 2.4s ease-in-out infinite;
+}
+@keyframes pulseRing {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--slide-color, #2563eb) 30%, transparent); }
+  50%      { box-shadow: 0 0 0 8px color-mix(in srgb, var(--slide-color, #2563eb) 0%, transparent); }
+}
+
+/* 4. Bloques de código con líneas resaltables */
+.code-block {
+  font-family: Consolas, "Cascadia Code", monospace;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 18px;
+  font-size: calc(0.9rem * var(--scale-meta));
+  line-height: 1.55;
+  overflow-x: auto;
+  border: 1px solid #334155;
+}
+.code-line { display: block; padding: 1px 6px; border-radius: 4px; }
+.code-line.hl {
+  background: color-mix(in srgb, var(--slide-color, #2563eb) 28%, transparent);
+  border-left: 3px solid var(--slide-color, #2563eb);
+  color: #ffffff;
+}
+
+/* 5. Secuencia controlada por estados ([data-stepper]) */
+.step-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 12px 18px;
+}
+.step-status { font-size: calc(0.95rem * var(--scale-body)); color: var(--muted); }
+.step-status strong { color: var(--text); }
+[data-step] { transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease; }
+[data-step].is-dim { opacity: 0.45; }
+[data-step].is-focus {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px -8px color-mix(in srgb, var(--slide-color, #2563eb) 36%, transparent);
+}

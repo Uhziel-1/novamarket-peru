@@ -1,0 +1,16 @@
+# Entorno verificado: Python 3.12
+requests==2.34.2
+pandas==3.0.5
+numpy==2.5.2
+scipy==1.18.1
+scikit-learn==1.9.1
+joblib==1.6.0
+shap==0.54.1
+matplotlib==3.11.1
+seaborn==0.13.2
+fastapi==0.143.0
+uvicorn[standard]==0.54.0
+pydantic==2.14.0
+httpx==0.28.1
+pytest==9.2.0
+nbformat==5.11.1

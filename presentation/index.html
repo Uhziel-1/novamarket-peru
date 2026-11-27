@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" data-nav-pos="bottom" data-anim="on">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NovaMarket Perú — Cómo Funciona, Fórmulas, APIs y Aporte al Negocio</title>
+  <link rel="stylesheet" href="deck-base.css" />
+  <link rel="stylesheet" href="animaciones.css" />
+  <link rel="stylesheet" href="demo.css" />
+</head>
+<body>
+
+  <div class="top-progress"><div id="progressFill" class="top-progress-fill"></div></div>
+
+  <main class="deck">
+
+    <!-- ==================== 00 · PORTADA ==================== -->
+    <section class="slide slide-title active" data-group="0" data-color="#1e293b" data-kind="title" data-title="Portada" style="--slide-color:#1e293b">
+      <div class="title-pill anim d1">Minería de Datos · Metodología CRISP-DM · Sistema + APIs + Negocio</div>
+      <h1 class="anim d2">NovaMarket Perú</h1>
+      <p class="title-sub anim d3">
+        Tienda online inteligente diseñada para explicar <strong>por qué</strong> se usa Minería de Datos, <strong>cómo se calcula cada recomendación</strong>, cuándo actúa cada API y <strong>cuánto valor aporta al negocio</strong>.
+      </p>
+      <div class="cover-meta anim d4">
+        <span><strong>Autor:</strong> Uhziel Elí Condori Rojas</span>
+        <span><strong>Curso:</strong> Minería de Datos — UPeU 2026-2</span>
+        <span><strong>Base Real:</strong> 541,909 transacciones (Online Retail)</span>
+      </div>
+    </section>
+
+    <!-- ==================== BLOQUE 01 (#2563eb): EL SISTEMA WEB ==================== -->
+    <section class="slide slide-title" data-group="1" data-color="#2563eb" data-kind="title" data-title="01 · El Sistema Web (Cliente vs Gerencia)" style="--slide-color:#2563eb">
+      <div class="title-pill anim d1">Bloque 01</div>
+      <h1 class="anim d2">Vista Cliente vs. Vista Interna</h1>
+      <p class="title-sub anim d3">
+        Un comprador normal solo ve una tienda limpia estilo marketplace; la gerencia y el expositor ven por dentro las fórmulas, las proyecciones Pasado → Futuro y las APIs en vivo.
+      </p>
+      <span class="section-num-bg">01</span>
+    </section>
+
+    <!-- 1.1 SEPARACIÓN DE VISTAS -->
+    <section class="slide" data-group="1" data-color="#2563eb" data-kind="content" data-title="1.1 Arquitectura: Afuera vs Adentro" style="--slide-color:#2563eb">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">01 · El Sistema Web (NovaMarket Perú)</div>
+        <h2>1.1 Separación Clara: Afuera (Cliente) vs. Adentro (Empresa)</h2>
+        <p class="header-summary">Resuelve el problema de mostrar métricas internas al comprador, sin ocultar el motor cuando se audita.</p>
+      </header>
+      <div class="full-body">
+        <div class="card-grid-3 anim d2">
+          <div class="card accent-left">
+            <h3>1. Tienda Pública (Cliente)</h3>
+            <ul class="bullet-list">
+              <li>Catálogo limpio en 4 columnas con precios en <strong>Soles (PEN)</strong> y carrito lateral.</li>
+              <li><strong>Buscador realista:</strong> espera <em>Enter</em>, entiende español (<code>taza → cup</code>) y corrige tipeo (<code>tecup → teacup</code>).</li>
+              <li>Al entrar al detalle de un producto, muestra <strong>4 complementos debajo</strong>; si no hay regla fuerte, promociona la misma categoría para nunca mostrar vacío.</li>
+            </ul>
+          </div>
+          <div class="card accent-left">
+            <h3>2. Botón "Modo Auditoría IA"</h3>
+            <ul class="bullet-list">
+              <li>Interruptor opcional en la cabecera (<code>OFF</code> por defecto para el cliente).</li>
+              <li>Al activarlo en la exposición, revela en el detalle del producto: cuántas boletas lo respaldan, su <strong>Confianza %</strong>, <strong>Lift</strong> y cuánto <strong>+S/</strong> suma al ticket.</li>
+              <li>También permite simular perfiles de comprador detrás de escena.</li>
+            </ul>
+          </div>
+          <div class="card accent-left">
+            <h3>3. Panel Interno (Gerencia)</h3>
+            <ul class="bullet-list">
+              <li><strong>Pasado → Presente → Futuro:</strong> curva real mensual + proyección a 3 meses con simulador de ROI.</li>
+              <li><strong>Control de catálogo:</strong> inventario de los <code>150</code> SKUs por categoría y estrategia por segmento RFM.</li>
+              <li><strong>Cero adivinanzas:</strong> bitácora viva de APIs y glosario para practicantes nuevos.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1.2 CUÁNDO SE LLAMA CADA API Y PARA QUÉ SIRVE -->
+    <section class="slide" data-group="1" data-color="#2563eb" data-kind="content" data-title="1.2 Cuándo se Llama Cada API y Qué Aporta" style="--slide-color:#2563eb">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">01 · El Sistema Web (NovaMarket Perú)</div>
+        <h2>1.2 Mapa de APIs: Cuándo Actúan y Qué Beneficio Dan</h2>
+        <p class="header-summary">Cada llamada externa o interna cumple una función comercial concreta (no decorativa).</p>
+      </header>
+      <div class="full-body">
+        <div class="card anim d2">
+          <table class="clean-table">
+            <thead>
+              <tr>
+                <th>API / Endpoint</th>
+                <th>Cuándo se dispara</th>
+                <th>Qué hace internamente</th>
+                <th>Para qué sirve al negocio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>open.er-api.com</code> (Ext.)</td>
+                <td>Al abrir la web y al emitir boleta</td>
+                <td>Obtiene tasa real USD → PEN (ej. <code>3.481</code>)</td>
+                <td>Evita cobrar con dólar desactualizado y protege el margen en productos importados.</td>
+              </tr>
+              <tr>
+                <td><code>date.nager.at</code> (Ext.)</td>
+                <td>Al cargar contexto gerencial</td>
+                <td>Lee feriados de Perú (<code>2026-12-08</code>)</td>
+                <td>Permite preparar promociones y stock antes de fechas festivas de alta demanda.</td>
+              </tr>
+              <tr>
+                <td><code>GET /api/products</code></td>
+                <td>Al pulsar <em>Enter</em> en buscador</td>
+                <td>Sinónimos ES→EN + <code>difflib</code> + popularidad</td>
+                <td>No pierde ventas por errores de escritura y prioriza artículos que más rotan.</td>
+              </tr>
+              <tr>
+                <td><code>POST /api/recommend</code></td>
+                <td>Al abrir un producto o el carrito</td>
+                <td>Reglas <code>Lift × Conf</code> + respaldo categoría</td>
+                <td>Eleva el monto por compra mostrando complementos reales en lugar de dejar espacios vacíos.</td>
+              </tr>
+              <tr>
+                <td><code>POST /predict</code></td>
+                <td>En Predictor Interno o Auditoría</td>
+                <td>Corre <code>K-Means</code> + <code>RandomForest</code></td>
+                <td>Identifica quién está por abandonar (<code>En Riesgo</code>) para enviarle cupón antes de perderlo.</td>
+              </tr>
+              <tr>
+                <td><code>POST /api/checkout</code></td>
+                <td>Al finalizar compra en el carrito</td>
+                <td>Guarda boleta en SQLite + bandera IA</td>
+                <td>Audita cuántas boletas reales aceptaron sugerencias del modelo.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1.3 DEMO VERIFICADA + PROYECCIÓN ECONÓMICA -->
+    <section class="slide" data-group="1" data-color="#2563eb" data-kind="content" data-title="1.3 Ejemplo Verificado: POST /predict y ROI" style="--slide-color:#2563eb">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">01 · El Sistema Web (NovaMarket Perú)</div>
+        <h2>1.3 Así Decide el Modelo en Tiempo Real (<code>POST /predict</code>)</h2>
+        <p class="header-summary">Compara un cliente VIP frente a uno en riesgo para decidir si dar cupón o venta cruzada.</p>
+      </header>
+
+      <div class="split-balanced anim d2">
+        <div class="demo-panel">
+          <div class="preset-row">
+            <button type="button" class="preset-btn active" data-preset="vip">Perfil VIP Campeón (#14646)</button>
+            <button type="button" class="preset-btn" data-preset="riesgo">Perfil Riesgo de Fuga (#17850)</button>
+          </div>
+          <div class="demo-grid">
+            <div class="demo-field"><label>recency_days</label><input id="in_recency_days" type="number" value="12" /></div>
+            <div class="demo-field"><label>frequency</label><input id="in_frequency" type="number" value="18" /></div>
+            <div class="demo-field"><label>monetary (USD)</label><input id="in_monetary" type="number" value="6450" /></div>
+            <div class="demo-field"><label>total_items</label><input id="in_total_items" type="number" value="1200" /></div>
+            <div class="demo-field"><label>unique_products</label><input id="in_unique_products" type="number" value="95" /></div>
+            <div class="demo-field"><label>tenure_days</label><input id="in_tenure_days" type="number" value="240" /></div>
+            <div class="demo-field"><label>cancellation_count</label><input id="in_cancellation_count" type="number" value="0" /></div>
+            <div class="demo-field">
+              <label>is_uk</label>
+              <select id="in_is_uk">
+                <option value="Internacional" selected>Internacional</option>
+                <option value="UK">UK</option>
+              </select>
+            </div>
+            <div class="demo-field"><label>algoritmo</label><input type="text" value="RandomForest" readonly /></div>
+          </div>
+          <div class="demo-actions">
+            <button type="button" id="btnRunDemo" class="btn-demo">Probar en API (38420)</button>
+            <span id="demoStatus" class="demo-status">Ejemplo verificado #14646 (POST /predict)</span>
+          </div>
+        </div>
+
+        <div class="demo-panel">
+          <div class="prob-hero">
+            <span id="demoSeg" class="seg-badge">VIP Campeón · Alta Fidelidad</span>
+            <span id="demoProb" class="prob-big">95.22 %</span>
+          </div>
+          <strong id="demoTitle">Recompra probable en 90 días (predicción = 1 · fuga 4.78 %)</strong>
+          <div class="bar-track" style="height:14px">
+            <div id="demoBar" class="bar-fill" style="--w:95%"></div>
+          </div>
+          <ul id="demoFactors" class="bullet-list">
+            <li>Compra reciente (12 días desde última visita)</li>
+            <li>Alta recurrencia (18 boletas históricas)</li>
+            <li>Alto valor acumulado ($6,450 USD)</li>
+            <li>Relación madura (240 días de antigüedad)</li>
+          </ul>
+          <div id="demoAction" class="result-pill">
+            Ofrecer venta cruzada premium o envío prioritario sin necesidad de descuento agresivo.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== BLOQUE 02 (#7c3aed): CÓMO SE CALCULA Y CRISP-DM ==================== -->
+    <section class="slide slide-title" data-group="2" data-color="#7c3aed" data-kind="title" data-title="02 · Cómo se Calcula y CRISP-DM" style="--slide-color:#7c3aed">
+      <div class="title-pill anim d1">Bloque 02</div>
+      <h1 class="anim d2">Cómo se Calcula y Aporte Real</h1>
+      <p class="title-sub anim d3">
+        Explicación directa de las fórmulas detrás de las recomendaciones, la predicción futura sin fuga temporal y las 6 fases CRISP-DM.
+      </p>
+      <span class="section-num-bg">02</span>
+    </section>
+
+    <!-- 2.0 FASE 1: EL PROBLEMA Y QUÉ GANA EL NEGOCIO -->
+    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 1 · Por Qué se Hace (Negocio y ROI)" style="--slide-color:#7c3aed">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">02 · Metodología CRISP-DM · Fase 1 de 6</div>
+        <h2>Fase 1: Qué Problema Pierde Dinero y Qué Aporta el Proyecto</h2>
+        <p class="header-summary">Pasar de mostrar productos estáticos a tomar decisiones comerciales medibles en caja y gerencia.</p>
+      </header>
+      <div class="full-body">
+        <div class="card-grid-2 anim d2">
+          <div class="card accent-left">
+            <h3>Sin Minería de Datos (Antes)</h3>
+            <ul class="bullet-list">
+              <li><strong>Carritos pequeños:</strong> el cliente compra 1 artículo y se va porque nadie le sugiere el complemento natural que otros ya llevan.</li>
+              <li><strong>Fuga silenciosa:</strong> los <code>1,024</code> clientes <em>En Riesgo</em> (gasto medio <code>$1,506</code>) dejan de volver sin recibir ninguna campaña a tiempo.</li>
+              <li><strong>Gerencia a ciegas:</strong> no se mide qué tanto crece el ingreso al combinar venta cruzada + retención.</li>
+            </ul>
+          </div>
+          <div class="card accent-left">
+            <h3>Con NovaMarket IA (Aporte Proyectado)</h3>
+            <ul class="bullet-list">
+              <li><strong>Venta cruzada automática:</strong> recomendar complementos reales con <code>1,560</code> reglas aumenta el valor de boleta sin gastar más en anuncios.</li>
+              <li><strong>Descuentos solo donde hacen falta:</strong> no rebajar margen a los <code>458 VIP</code> (<code>93.7 %</code> ya recompran), sino enfocar cupones en <code>En Riesgo</code>.</li>
+              <li><strong>Proyección Pasado → Futuro:</strong> el panel gerencial simula el retorno exacto en Soles por trimestre.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2.1 CÓMO SE CALCULAN LAS REGLAS (ARITMÉTICA CLARA) -->
+    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Cómo se Calcula · Reglas de Asociación" style="--slide-color:#7c3aed">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">02 · Metodología CRISP-DM · Explicación Matemática Simple</div>
+        <h2>¿Cómo se Calcula Qué Producto Recomendar Debajo de Otro?</h2>
+        <p class="header-summary">No es aleatorio: el algoritmo cuenta co-ocurrencias reales dentro de las 18,532 boletas históricas.</p>
+      </header>
+      <div class="full-body">
+        <div class="card-grid-3 anim d2">
+          <div class="card accent-left">
+            <h3>1. Contar Boletas Juntas</h3>
+            <p>Se arma una matriz <code>Boleta × Producto</code> sobre los <code>150</code> SKUs principales.</p>
+            <p style="margin-top:8px"><strong>Ejemplo real:</strong> La <em>Pink Regency Teacup (22698)</em> y la <em>Green Regency Teacup (22697)</em> aparecieron juntas en <strong>460 boletas</strong>.</p>
+          </div>
+          <div class="card accent-left">
+            <h3>2. Calcular Confianza (%)</h3>
+            <p><code>Confianza = Boletas(A y B) / Boletas(A)</code></p>
+            <p style="margin-top:8px">Para ese par da <strong>82.73 %</strong>: significa que de cada 100 clientes que compraron la taza rosa, ~83 también llevaron la verde en la misma boleta.</p>
+          </div>
+          <div class="card accent-left">
+            <h3>3. Medir el Lift y Promocionar</h3>
+            <p><code>Lift = Confianza / Popularidad(B)</code></p>
+            <p style="margin-top:8px">Obtiene <strong>18.85×</strong> (19 veces más fuerte que el azar). Si un SKU tiene &lt; 4 reglas, el backend completa con <strong>misma categoría y más vendidos</strong> para promocionar siempre.</p>
+          </div>
+        </div>
+        <div class="result-pill anim d3">
+          <strong>En la práctica:</strong> El cliente ve sugerencias útiles y coherentes; el auditor/profesor activa <strong>Modo Auditoría IA</strong> y ve exactamente estos números debajo de cada tarjeta.
+        </div>
+      </div>
+    </section>
+
+    <!-- 2.2 FASE 2: AUDITORÍA Y EVOLUCIÓN HISTÓRICA REAL -->
+    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 2 · Auditoría y Ventas Reales (Pasado)" style="--slide-color:#7c3aed">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">02 · Metodología CRISP-DM · Fase 2 de 6 (EDA)</div>
+        <h2>Fase 2: Limpieza de Datos Reales y Serie Mensual</h2>
+        <p class="header-summary">De 541,909 registros crudos a $8,911,407.90 en ventas reales limpias para construir el pasado histórico.</p>
+      </header>
+      <div class="full-body">
+        <div class="dual-charts anim d2">
+          <div class="chart-card">
+            <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 1: Se retiraron 135,080 filas sin cliente, 11,805 con cantidad/precio ≤ 0 y 9,288 devoluciones ('C').">
+              <img src="assets/01_eda_calidad_datos.png" alt="Auditoría de calidad de datos" />
+            </div>
+            <p class="chart-caption"><strong>Fig. 1:</strong> Por qué se limpia — quitar devoluciones evita recomendar productos devueltos o clientes fantasma.</p>
+          </div>
+          <div class="chart-card">
+            <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 2: Serie mensual real de ingresos: sube en Sep–Nov 2011 hasta $1.16M (base para proyectar futuro).">
+              <img src="assets/02_eda_ventas_mensuales.png" alt="Evolución mensual de ventas" />
+            </div>
+            <p class="chart-caption"><strong>Fig. 2:</strong> Curva real del pasado — pico en noviembre 2011 (<strong>$1,161,817</strong> en <code>2,657</code> boletas).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2.3 FASE 3: CÓMO SE PREPARA RFM SIN HACER TRAMPA -->
+    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 3 · Corte Temporal RFM Anti-Leakage" style="--slide-color:#7c3aed">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">02 · Metodología CRISP-DM · Fase 3 de 6</div>
+        <h2>Fase 3: Cómo Se Predice el Futuro Sin Hacer Trampa</h2>
+        <p class="header-summary">Se corta la historia el 2011-09-09: solo el pasado entra como variable X; los 90 días posteriores son la respuesta real.</p>
+      </header>
+      <div class="full-body">
+        <div class="card-grid-3 anim d2">
+          <div class="card accent-left">
+            <h3>Ventana Pasada (<code>&lt; 2011-09-09</code>)</h3>
+            <p>Para cada uno de los <code>3,360</code> clientes se calcula:</p>
+            <ul class="bullet-list" style="margin-top:6px">
+              <li><strong>Recency:</strong> días desde su última compra.</li>
+              <li><strong>Frequency:</strong> boletas acumuladas.</li>
+              <li><strong>Monetary:</strong> gasto total en USD.</li>
+            </ul>
+          </div>
+          <div class="card accent-left">
+            <h3>Ventana Futura (<code>≥ 2011-09-09</code>)</h3>
+            <p>Se observa en la realidad si el cliente volvió o no en el último trimestre.</p>
+            <p style="margin-top:8px">Resultado real: <strong>57.11 % sí recompró</strong>. Así el modelo aprende hábitos pasados para anticipar el futuro.</p>
+          </div>
+          <div class="card accent-left">
+            <h3>Segmentos Reales (<code>K-Means</code>)</h3>
+            <ul class="bullet-list">
+              <li><strong>VIP Campeón (458):</strong> prom. $6,833 · <strong>93.7 %</strong> recompran.</li>
+              <li><strong>En Riesgo (1,024):</strong> prom. $1,506 · <strong>67.0 %</strong> recompran (foco de rescate).</li>
+              <li><strong>Cliente Leal (432)</strong> y <strong>Dormido (1,446)</strong>.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="result-pill anim d3">
+          <strong>También se filtran 150 SKUs clave:</strong> De <code>3,665</code> productos históricos se extrae el catálogo activo de alta rotación (<code>396,337</code> filas limpias con SHA-256 verificado en <code>DATA_VERSION.md</code>).
+        </div>
+      </div>
+    </section>
+
+    <!-- 2.4 FASE 4 Y 5: MODELADO Y EVALUACIÓN HONESTA -->
+    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 4 y 5 · Modelos, ROC y Auditoría" style="--slide-color:#7c3aed">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">02 · Metodología CRISP-DM · Fases 4 y 5 de 6</div>
+        <h2>Fases 4–5: Reglas, Clasificadores y Auditoría Transparente</h2>
+        <p class="header-summary">Comparación de 3 algoritmos sobre clientes futuros reales y análisis crítico frente a la meta inicial.</p>
+      </header>
+      <div class="split-balanced anim d2">
+        <div class="dual-charts" style="grid-template-columns: 1fr; gap:12px;">
+          <div class="chart-card">
+            <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 4: Top reglas de asociación (juego Regency alcanza 18.85× Lift).">
+              <img src="assets/04_reglas_asociacion_lift.png" alt="Reglas de asociación" style="max-height:175px" />
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 5: Curvas ROC y Matriz de Confusión del modelo ganador.">
+              <img src="assets/05_roc_y_confusion.png" alt="ROC y Matriz de Confusión" style="max-height:175px" />
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div class="card">
+            <table class="clean-table">
+              <thead><tr><th>Modelo</th><th>CV AUC</th><th>Holdout AUC</th><th>PR-AUC</th><th>F1</th></tr></thead>
+              <tbody>
+                <tr><td>LogisticRegression</td><td>0.7394</td><td>0.7651</td><td>0.8241</td><td>0.7358</td></tr>
+                <tr class="row-winner"><td>RandomForest (Ganador)</td><td><strong>0.7426</strong></td><td>0.7647</td><td>0.8295</td><td>0.7333</td></tr>
+                <tr><td>HistGradientBoosting</td><td>0.7401</td><td><strong>0.7714</strong></td><td><strong>0.8337</strong></td><td>0.7304</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="audit-note">
+            <strong>Por qué 0.7647 y no 0.99 artificial:</strong> Predecir si un humano comprará en los próximos 90 días sin usar datos futuros es difícil. Al no hacer trampa, se obtuvo <code>0.7647</code> (RF) y <code>0.7714</code> (HGB) con sólido <strong>PR-AUC (0.83)</strong>, suficiente para priorizar cupones en el grupo <em>En Riesgo</em>.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2.5 EXPLICABILIDAD SHAP -->
+    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 5 · Por Qué Decide el Modelo (SHAP)" style="--slide-color:#7c3aed">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">02 · Metodología CRISP-DM · Fase 5 de 6 (XAI)</div>
+        <h2>Explicabilidad SHAP: En Qué Se Fija el Modelo Para Predecir</h2>
+        <p class="header-summary">Prueba objetiva de que el modelo sigue la lógica comercial real (antigüedad, gasto y días sin volver).</p>
+      </header>
+      <div class="split-balanced anim d2">
+        <div class="single-chart-wrap">
+          <div class="chart-img-wrap" data-lightbox-img data-caption="Figura 6: Impacto SHAP global sobre las predicciones de recompra a 90 días.">
+            <img src="assets/06_shap_clientes.png" alt="SHAP Clientes" />
+          </div>
+          <p class="chart-caption"><strong>Fig. 6:</strong> Cada fila muestra qué variable pesa más para separar quién vuelve de quién abandona.</p>
+        </div>
+
+        <div class="card">
+          <h3>Peso Real de Cada Variable (|SHAP|)</h3>
+          <div class="bar-chart" style="margin-top:12px">
+            <div class="bar-row"><span class="bar-lbl">Antigüedad (tenure)</span><div class="bar-track"><div class="bar-fill" style="--w:100%"></div></div><span class="bar-num">0.0609</span></div>
+            <div class="bar-row"><span class="bar-lbl">Gasto (monetary)</span><div class="bar-track"><div class="bar-fill" style="--w:77%"></div></div><span class="bar-num">0.0468</span></div>
+            <div class="bar-row"><span class="bar-lbl">Inactividad (recency)</span><div class="bar-track"><div class="bar-fill" style="--w:59%"></div></div><span class="bar-num">0.0360</span></div>
+            <div class="bar-row"><span class="bar-lbl">Boletas (frequency)</span><div class="bar-track"><div class="bar-fill" style="--w:54%"></div></div><span class="bar-num">0.0329</span></div>
+            <div class="bar-row"><span class="bar-lbl">Unidades (items)</span><div class="bar-track"><div class="bar-fill" style="--w:41%"></div></div><span class="bar-num">0.0250</span></div>
+            <div class="bar-row"><span class="bar-lbl">Variedad (unique)</span><div class="bar-track"><div class="bar-fill" style="--w:39%"></div></div><span class="bar-num">0.0236</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2.6 FASE 6: DESPLIEGUE Y OPERACIÓN PARA PRACTICANTES -->
+    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 6 · Operación, Pruebas y Replicabilidad" style="--slide-color:#7c3aed">
+      <header class="slide-header anim d1">
+        <div class="kicker-sec">02 · Metodología CRISP-DM · Fase 6 de 6</div>
+        <h2>Fase 6: Sistema Documentado, Probado y Replicable</h2>
+        <p class="header-summary">Cualquier integrante o practicante nuevo entiende qué mide cada pantalla y puede probar el sistema en 1 clic.</p>
+      </header>
+      <div class="full-body">
+        <div class="card-grid-3 anim d2">
+          <div class="card accent-left">
+            <h3>Autosuficiente para el Equipo</h3>
+            <ul class="bullet-list">
+              <li>La pestaña <strong>Gerencia</strong> incluye explicaciones bajo cada KPI, inventario por categoría y glosario operativo.</li>
+              <li>La <strong>Bitácora de APIs</strong> registra en vivo qué endpoint respondió y por qué se llamó.</li>
+            </ul>
+          </div>
+          <div class="card accent-left">
+            <h3>Verificado con <code>pytest</code></h3>
+            <ul class="bullet-list">
+              <li>Pruebas automatizadas cubren buscador, sinónimos/errores, reglas con respaldo, validación Pydantic (<code>422</code>) y SQLite.</li>
+              <li>Linaje SHA-256 guardado en <code>data/DATA_VERSION.md</code>.</li>
+            </ul>
+          </div>
+          <div class="card accent-left">
+            <h3>Puerto Libre y Scripts <code>.bat</code></h3>
+            <ul class="bullet-list">
+              <li><code>ABRIR_SISTEMA.bat</code> levanta tienda y API en <code>http://127.0.0.1:38420</code> sin chocar con <code>8000</code>.</li>
+              <li><code>REENTRENAR_MODELO.bat</code> reproduce todo el pipeline desde el CSV crudo.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="result-pill anim d3">
+          <strong>Listo para demostrar en clase:</strong> Abre la tienda como cliente, activa <strong>Modo Auditoría IA</strong> para mostrar los cálculos y pasa a <strong>Gerencia</strong> para ver las proyecciones Pasado → Futuro.
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CIERRE ==================== -->
+    <section class="slide slide-title" data-group="99" data-color="#1e293b" data-kind="title" data-title="Cierre — Gracias" style="--slide-color:#1e293b">
+      <div class="title-pill anim d1">Cierre</div>
+      <h1 class="anim d2">Gracias</h1>
+      <p class="title-sub anim d3">Demostración en vivo lista en <code>http://127.0.0.1:38420</code> (<code>ABRIR_SISTEMA.bat</code>).</p>
+      <div class="cover-meta anim d4">
+        <span><strong>Autor:</strong> Uhziel Elí Condori Rojas</span>
+        <span><strong>Proyecto:</strong> NovaMarket Perú (CRISP-DM)</span>
+      </div>
+    </section>
+
+  </main>
+
+  <nav id="bottomNav" class="bottom-nav" aria-label="Navegación de diapositivas">
+    <div class="nav-left">
+      <button id="btnPrev" class="nav-btn icon-only" title="Anterior (←)">◀</button>
+      <span id="slideCounter" class="slide-counter">01 / 14</span>
+      <button id="btnNext" class="nav-btn icon-only" title="Siguiente (→ / Espacio)">▶</button>
+      <button id="btnFs" class="nav-btn icon-only" title="Pantalla completa (F)">⛶</button>
+    </div>
+
+    <div id="navDots" class="nav-center" aria-label="Navegación por secciones"></div>
+
+    <div class="nav-right">
+      <button id="btnConfig" class="nav-btn icon-only" title="Configuración de la diapositiva (C)" aria-expanded="false" aria-controls="configPanel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+      <button id="btnDrawer" class="nav-btn" title="Índice de diapositivas (M)">☰ <span class="btn-lbl-hide">Índice</span></button>
+    </div>
+  </nav>
+
+  <aside id="configPanel" class="config-panel" aria-label="Configuración de visualización" hidden>
+    <div class="config-head">
+      <strong>Ajustes de Diapositiva</strong>
+      <button id="btnCloseConfig" class="nav-btn icon-only cfg-close" title="Cerrar">✕</button>
+    </div>
+    <div class="config-group">
+      <label class="cfg-label">Tema de contenido</label>
+      <div class="cfg-pills" data-cfg-group="theme">
+        <button class="cfg-pill" data-val="light">Claro</button>
+        <button class="cfg-pill" data-val="dark">Oscuro</button>
+      </div>
+    </div>
+    <div class="config-group">
+      <label class="cfg-label">Posición de la barra</label>
+      <div class="cfg-pills" data-cfg-group="navPos">
+        <button class="cfg-pill" data-val="bottom">Abajo</button>
+        <button class="cfg-pill" data-val="top">Arriba</button>
+        <button class="cfg-pill" data-val="float">Flotante</button>
+        <button class="cfg-pill" data-val="autohide">Ocultar</button>
+      </div>
+    </div>
+    <div class="config-group">
+      <div class="cfg-row-head">
+        <label class="cfg-label">Escala general (±)</label>
+        <span id="valScaleAll" class="cfg-val">100%</span>
+      </div>
+      <div class="cfg-stepper">
+        <button class="cfg-step" data-target="scaleAll" data-delta="-0.06">−1 pt</button>
+        <input id="rngScaleAll" type="range" min="0.82" max="1.36" step="0.06" value="1" />
+        <button class="cfg-step" data-target="scaleAll" data-delta="0.06">+1 pt</button>
+      </div>
+    </div>
+    <details class="config-details">
+      <summary>Ajuste independiente de letras</summary>
+      <div class="config-subgrid">
+        <div class="cfg-subrow">
+          <span>Títulos</span>
+          <input id="rngScaleTitle" type="range" min="0.82" max="1.35" step="0.05" value="1" />
+          <span id="valScaleTitle">100%</span>
+        </div>
+        <div class="cfg-subrow">
+          <span>Texto / Tarjetas</span>
+          <input id="rngScaleBody" type="range" min="0.82" max="1.35" step="0.05" value="1" />
+          <span id="valScaleBody">100%</span>
+        </div>
+        <div class="cfg-subrow">
+          <span>Tablas / Notas</span>
+          <input id="rngScaleMeta" type="range" min="0.82" max="1.35" step="0.05" value="1" />
+          <span id="valScaleMeta">100%</span>
+        </div>
+      </div>
+    </details>
+    <div class="config-actions">
+      <button id="btnToggleAnim" class="nav-btn cfg-act">Animaciones: ON</button>
+      <button id="btnPrintPdf" class="nav-btn cfg-act">PDF</button>
+      <button id="btnResetCfg" class="nav-btn cfg-act">Reset</button>
+    </div>
+  </aside>
+
+  <div id="drawerBackdrop" class="drawer-backdrop"></div>
+  <aside id="drawer" class="drawer" aria-label="Índice de diapositivas">
+    <div class="drawer-head">
+      <h3>Índice de la Presentación</h3>
+      <button id="btnCloseDrawer" class="nav-btn icon-only" title="Cerrar (Esc)">✕</button>
+    </div>
+    <div id="drawerList" class="drawer-list"></div>
+  </aside>
+
+  <div id="lightbox" class="lightbox" title="Clic o Esc para cerrar">
+    <img id="lbImg" alt="" />
+    <p id="lbCap"></p>
+  </div>
+
+  <script src="deck-core.js"></script>
+  <script src="demo.js"></script>
+</body>
+</html>
