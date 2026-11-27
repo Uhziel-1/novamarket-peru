@@ -205,29 +205,29 @@
       <span class="section-num-bg">02</span>
     </section>
 
-    <!-- 2.0 FASE 1: EL PROBLEMA Y QUÉ GANA EL NEGOCIO -->
-    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 1 · Por Qué se Hace (Negocio y ROI)" style="--slide-color:#7c3aed">
+    <!-- 2.0 FASE 1: OBJETIVOS DE NEGOCIO Y MINERÍA -->
+    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 1 · Comprensión del Negocio" style="--slide-color:#7c3aed">
       <header class="slide-header anim d1">
         <div class="kicker-sec">02 · Metodología CRISP-DM · Fase 1 de 6</div>
-        <h2>Fase 1: Qué Problema Pierde Dinero y Qué Aporta el Proyecto</h2>
-        <p class="header-summary">Pasar de mostrar productos estáticos a tomar decisiones comerciales medibles en caja y gerencia.</p>
+        <h2>Fase 1: Comprensión del Negocio y Criterios de Éxito</h2>
+        <p class="header-summary">Definición formal del problema comercial, traducción a tareas de Minería de Datos y meta medible.</p>
       </header>
       <div class="full-body">
         <div class="card-grid-2 anim d2">
           <div class="card accent-left">
-            <h3>Sin Minería de Datos (Antes)</h3>
+            <h3>Objetivo de Negocio y Situación</h3>
             <ul class="bullet-list">
-              <li><strong>Carritos pequeños:</strong> el cliente compra 1 artículo y se va porque nadie le sugiere el complemento natural que otros ya llevan.</li>
-              <li><strong>Fuga silenciosa:</strong> los <code>1,024</code> clientes <em>En Riesgo</em> (gasto medio <code>$1,506</code>) dejan de volver sin recibir ninguna campaña a tiempo.</li>
-              <li><strong>Gerencia a ciegas:</strong> no se mide qué tanto crece el ingreso al combinar venta cruzada + retención.</li>
+              <li><strong>Problema (Antes):</strong> carritos de 1 solo artículo (baja venta cruzada) y fuga silenciosa de <code>1,024</code> clientes <em>En Riesgo</em> (gasto medio <code>$1,506</code>).</li>
+              <li><strong>Situación y recursos:</strong> <code>541,909</code> boletas reales históricas + APIs externas vivas (FX y feriados Perú) + almacenamiento SQLite.</li>
+              <li><strong>Meta comercial:</strong> subir el ticket en caja y focalizar cupones solo donde hay riesgo real.</li>
             </ul>
           </div>
           <div class="card accent-left">
-            <h3>Con NovaMarket IA (Aporte Proyectado)</h3>
+            <h3>Objetivos de Minería y Criterios de Éxito</h3>
             <ul class="bullet-list">
-              <li><strong>Venta cruzada automática:</strong> recomendar complementos reales con <code>1,560</code> reglas aumenta el valor de boleta sin gastar más en anuncios.</li>
-              <li><strong>Descuentos solo donde hacen falta:</strong> no rebajar margen a los <code>458 VIP</code> (<code>93.7 %</code> ya recompran), sino enfocar cupones en <code>En Riesgo</code>.</li>
-              <li><strong>Proyección Pasado → Futuro:</strong> el panel gerencial simula el retorno exacto en Soles por trimestre.</li>
+              <li><strong>Motor 1 (No supervisado):</strong> Reglas de asociación con <code>Confianza ≥ 15 %</code> y <code>Lift ≥ 1.5×</code> para sugerir complementos.</li>
+              <li><strong>Motor 2 (Clustering + Supervisado):</strong> <code>K-Means (k=4)</code> + clasificación binaria de recompra a 90 días (meta <code>ROC-AUC ≥ 0.78</code> sin fuga).</li>
+              <li><strong>Aporte cuantificable:</strong> simulador de retorno trimestral en Soles dentro de Gerencia.</li>
             </ul>
           </div>
         </div>
@@ -396,39 +396,31 @@
       </div>
     </section>
 
-    <!-- 2.6 FASE 6: DESPLIEGUE Y OPERACIÓN PARA PRACTICANTES -->
-    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 6 · Operación, Pruebas y Replicabilidad" style="--slide-color:#7c3aed">
+    <!-- 2.6 FASE 6: LOS 4 ENTREGABLES DE DESPLIEGUE CRISP-DM -->
+    <section class="slide" data-group="2" data-color="#7c3aed" data-kind="content" data-title="Fase 6 · Despliegue, Monitoreo y Revisión" style="--slide-color:#7c3aed">
       <header class="slide-header anim d1">
-        <div class="kicker-sec">02 · Metodología CRISP-DM · Fase 6 de 6</div>
-        <h2>Fase 6: Sistema Documentado, Probado y Replicable</h2>
-        <p class="header-summary">Cualquier integrante o practicante nuevo entiende qué mide cada pantalla y puede probar el sistema en 1 clic.</p>
+        <div class="kicker-sec">02 · Metodología CRISP-DM · Fase 6 de 6 (Deployment)</div>
+        <h2>Fase 6: Despliegue, Monitoreo, Informe y Revisión</h2>
+        <p class="header-summary">Cubre los 4 entregables formales de CRISP-DM: puesta en producción, mantenimiento, documentación y lecciones aprendidas.</p>
       </header>
       <div class="full-body">
-        <div class="card-grid-3 anim d2">
+        <div class="card-grid-2 anim d2">
           <div class="card accent-left">
-            <h3>Autosuficiente para el Equipo</h3>
-            <ul class="bullet-list">
-              <li>La pestaña <strong>Gerencia</strong> incluye explicaciones bajo cada KPI, inventario por categoría y glosario operativo.</li>
-              <li>La <strong>Bitácora de APIs</strong> registra en vivo qué endpoint respondió y por qué se llamó.</li>
-            </ul>
+            <h3>1. Plan de Despliegue (Producción)</h3>
+            <p>Modelos <code>.joblib</code> y reglas <code>.json</code> expuestos en FastAPI (<code>/predict</code>, <code>/api/recommend</code>), listos en local (<code>127.0.0.1:38420</code>) y nube (<code>render.yaml</code> + GitHub Pages).</p>
           </div>
           <div class="card accent-left">
-            <h3>Verificado con <code>pytest</code></h3>
-            <ul class="bullet-list">
-              <li>Pruebas automatizadas cubren buscador, sinónimos/errores, reglas con respaldo, validación Pydantic (<code>422</code>) y SQLite.</li>
-              <li>Linaje SHA-256 guardado en <code>data/DATA_VERSION.md</code>.</li>
-            </ul>
+            <h3>2. Monitoreo y Mantenimiento</h3>
+            <p>Seguimiento en <strong>Gerencia + SQLite</strong> (boletas con IA <code>used_recommendation</code>, bitácora API y cambio estacional) + reentrenamiento con <code>REENTRENAR_MODELO.bat</code> ante desgaste de datos.</p>
           </div>
           <div class="card accent-left">
-            <h3>Puerto Libre y Scripts <code>.bat</code></h3>
-            <ul class="bullet-list">
-              <li><code>ABRIR_SISTEMA.bat</code> levanta tienda y API en <code>http://127.0.0.1:38420</code> sin chocar con <code>8000</code>.</li>
-              <li><code>REENTRENAR_MODELO.bat</code> reproduce todo el pipeline desde el CSV crudo.</li>
-            </ul>
+            <h3>3. Informe Final y Replicabilidad</h3>
+            <p>Documentación de las 6 fases en <code>docs/</code>, notebook reproducible, <code>requirements.txt</code>, hashes <strong>SHA-256</strong> (<code>DATA_VERSION.md</code>) y <code>5/5</code> pruebas <code>pytest</code>.</p>
           </div>
-        </div>
-        <div class="result-pill anim d3">
-          <strong>Listo para demostrar en clase:</strong> Abre la tienda como cliente, activa <strong>Modo Auditoría IA</strong> para mostrar los cálculos y pasa a <strong>Gerencia</strong> para ver las proyecciones Pasado → Futuro.
+          <div class="card accent-left">
+            <h3>4. Revisión del Proyecto (Mejoras)</h3>
+            <p><strong>Logro:</strong> predicción honesta (<code>0.7647</code> sin fuga). <strong>Limitación:</strong> histórico 2011 + SQLite local. <strong>Próximo ciclo:</strong> incorporar feriados como feature y migrar a PostgreSQL.</p>
+          </div>
         </div>
       </div>
     </section>
