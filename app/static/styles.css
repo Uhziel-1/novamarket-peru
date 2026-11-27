@@ -45,6 +45,12 @@ body {
   top: 0;
   z-index: 40;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+  transition: transform 0.24s ease;
+  will-change: transform;
+}
+
+.site-header.nav-hidden {
+  transform: translateY(-105%);
 }
 
 .header-main {
@@ -851,8 +857,10 @@ body {
 }
 
 @media (max-width: 860px) {
-  .site-header { position: static; }
-  .header-main-row { flex-wrap: wrap; gap: 10px; }
+  .site-header { position: sticky; top: 0; }
+  .header-main { padding: 8px 0; }
+  .header-sub { padding: 6px 0; }
+  .header-main-row { flex-wrap: wrap; gap: 8px; }
   .deliver-box { display: none; }
   .brand-word { font-size: 17px; }
   .audit-switch-btn { padding: 6px 10px; font-size: 12px; margin-left: auto; }

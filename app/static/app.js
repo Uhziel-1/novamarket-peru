@@ -44,6 +44,54 @@
   const cartDrawer = document.getElementById("cartDrawer");
   const cartBackdrop = document.getElementById("cartBackdrop");
   const toastEl = document.getElementById("toastNotice");
+  const siteHeader = document.querySelector(".site-header");
+
+  // Header inteligente en móviles: se oculta al bajar (rápido o lento) y reaparece al subir
+  let lastScrollY = window.scrollY || 0;
+  let scrollAcc = 0;
+  let scrollTicking = false;
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (scrollTicking) return;
+      scrollTicking = true;
+      window.requestAnimationFrame(() => {
+        const y = Math.max(0, window.scrollY || window.pageYOffset || 0);
+        const dy = y - lastScrollY;
+        lastScrollY = y;
+
+        if (window.innerWidth > 860 || !siteHeader) {
+          siteHeader?.classList.remove("nav-hidden");
+          scrollAcc = 0;
+          scrollTicking = false;
+          return;
+        }
+
+        scrollAcc = (dy > 0 && scrollAcc < 0) || (dy < 0 && scrollAcc > 0) ? dy : scrollAcc + dy;
+        const headerH = siteHeader.offsetHeight || 160;
+        const activeTag = document.activeElement?.tagName;
+        const headerTyping = siteHeader.contains(document.activeElement) && (activeTag === "INPUT" || activeTag === "SELECT");
+        const drawerOpen = cartDrawer && !cartDrawer.hidden;
+
+        if (y <= 32 || headerTyping || drawerOpen) {
+          siteHeader.classList.remove("nav-hidden");
+          scrollAcc = 0;
+        } else if (scrollAcc > 14 && y > headerH) {
+          siteHeader.classList.add("nav-hidden");
+          scrollAcc = 0;
+        } else if (scrollAcc < -12) {
+          siteHeader.classList.remove("nav-hidden");
+          scrollAcc = 0;
+        }
+        scrollTicking = false;
+      });
+    },
+    { passive: true }
+  );
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 860) siteHeader?.classList.remove("nav-hidden");
+  });
 
   function logApiCall(endpoint, purpose, summary) {
     const now = new Date().toLocaleTimeString("es-PE", { hour12: false });
