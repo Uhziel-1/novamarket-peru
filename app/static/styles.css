@@ -130,8 +130,9 @@ body {
 
 .search-input {
   flex: 1;
+  min-width: 0;
   border: none;
-  padding: 0 14px;
+  padding: 0 12px;
   font-size: 14.5px;
   color: var(--text);
   outline: none;
@@ -139,6 +140,7 @@ body {
 
 .search-submit {
   width: 48px;
+  flex-shrink: 0;
   border: none;
   background: #febd69;
   color: #111827;
@@ -350,13 +352,15 @@ body {
 .catalog-sub { color: var(--muted); font-size: 14px; margin-top: 2px; }
 
 .info-tag {
+  display: inline-block;
   background: #f0f9ff;
   color: #0369a1;
   border: 1px solid #bae6fd;
-  border-radius: 999px;
-  padding: 5px 12px;
+  border-radius: 10px;
+  padding: 6px 12px;
   font-size: 12.5px;
   font-weight: 600;
+  line-height: 1.35;
 }
 
 .search-suggestion-banner {
@@ -847,13 +851,33 @@ body {
 }
 
 @media (max-width: 860px) {
-  .header-main-row { flex-wrap: wrap; }
+  .site-header { position: static; }
+  .header-main-row { flex-wrap: wrap; gap: 10px; }
   .deliver-box { display: none; }
-  .search-shell { order: 3; min-width: 100%; }
+  .brand-word { font-size: 17px; }
+  .audit-switch-btn { padding: 6px 10px; font-size: 12px; margin-left: auto; }
+  .cart-trigger { padding: 6px 10px; font-size: 13px; }
+  .search-shell { order: 4; min-width: 100%; height: 40px; }
+  .search-cat { max-width: 102px; padding: 0 8px; font-size: 12px; }
+  .header-sub-row { gap: 10px; }
+  .main-nav { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; gap: 6px; }
+  .nav-tab { padding: 7px 6px; font-size: 12px; text-align: center; line-height: 1.25; }
+  .sub-cat-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+  .sub-cat-chips::-webkit-scrollbar { display: none; }
+  .sub-chip { white-space: nowrap; flex-shrink: 0; }
+  .sub-right { width: 100%; justify-content: space-between; font-size: 12px; }
   .product-grid, .reco-cards-grid, .kpi-grid-4 { grid-template-columns: 1fr 1fr; }
   .detail-card, .rfm-layout, .charts-grid-2 { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 560px) {
+  .container { padding: 0 14px; }
+  .store-hero-strip { padding: 14px 16px; }
   .product-grid, .reco-cards-grid, .kpi-grid-4, .rfm-form-grid { grid-template-columns: 1fr; }
 }
